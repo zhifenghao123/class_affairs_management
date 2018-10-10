@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="    
+       http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd    
+       http://cxf.apache.org/jaxrs 
+       http://cxf.apache.org/schemas/jaxrs.xsd    
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 导入CXF为扩展Spring提供的几个XML配置文件 -->
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+	<!-- 发布CXF服务类 开始 -->
+	<!-- 测试demo服务 -->
+	<!-- 查看类似于wsdl RESTful ws的wsdl文件说明书 http://[domainname]:[port]/cxf/testService?_wadl&_type=xml 
+		此处是有参数调用 http://localhost/cxf/testService/getTestString/ceuer -->
+	<jaxrs:server id="studentCXFService" address="/studentCXFService">
+		<jaxrs:serviceBeans>
+			<ref bean="studentCXFServiceImpl" />
+		</jaxrs:serviceBeans>
+	</jaxrs:server>
+	
+</beans>

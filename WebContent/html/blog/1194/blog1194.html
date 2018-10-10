@@ -1,0 +1,17 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="/img/favicon.ico" type="image/x-icon" rel="shortcut icon" /> 
+<title></title>
+<style type="text/css">
+#static_introduce table{width:520px !important;}
+#static_introduce{word-wrap:break-word;word-break:break-all;}
+</style>
+</head>
+<body>
+<div id="static_introduce">1.安装配置到matlab-------据说直接将libsvm-3.21\windows目录添加到工作路径下即可（点击 set path/设置路径）------我这里比较曲折，还是选择了编译：（1）将工具包放到任何地方均可，将工具包目录（libsvm-3.21主目录）添加到Matlab的搜索路径。Set Path-&gt;add with subfolders-&gt;save（2）命令行输入： mex  -setup    选择C++和vs2010（本机是vs2010）（3）工作目录进入到libsvm-3.21/matlab，然后命令行输入：make（4）命令行输入下面代码进行测试：clear;[label_vector, instance_matrix] =libsvmread(&#39;heart_scale&#39;);model = svmtrain(label_vector, instance_matrix);[predicted_label, accuracy, prob_estimates] = svmpredict(label_vector, instance_matrix, model, &#39;b&#39;);（可能会有的5）如果出现Invalid MEX-file &#39;xxxxxxwindows\libsvmread.mexw64&#39;: 找不到指定的模块。就把matlab下的mex文件复制到windows下全部替换即可。然后会得到正确的测试结果（是对根目录下的heart_scale进行的分析）：*optimization finished, #iter = 162nu = 0.431029obj = -100.877288, rho = 0.424462nSV = 132, nBSV = 107Total nSV = 132Accuracy = 86.6667% (234/270) (classification)2.一个简单的多分类举例clear;%特征矩阵PP=[1.25873.07615.70156.147715.18977.773914.2143;1.25713.06895.67496.124312.19497.747114.1543;1.25003.05735.59776.038912.19367.652713.9888;1.26143.07665.72346.206312.46287.839514.2903;1.22862.91096.90236.990414.11458.476916.7414;1.23022.91377.00117.058914.38088.546416.9477;1.21962.88616.85746.940817.18378.417216.7242;1.23302.91747.10857.062119.49438.550117.7029;1.49213.79877.74519.665921.436911.928719.6565;1.48743.77247.79349.671918.434011.955219.6265;1.48973.78827.74789.709118.774412.002119.5958;1.49853.82817.83919.769920.250311.982220.0870];%因变量向量T，可以看到有3种不同的结果-1 0 1T=[-1;-1;-1;-1;0;0;0;0;1;1;1;1];model=svmtrain(T,P,&#39;-c1-g2&#39;);%测试特征集P_test=[1.26233.09305.70506.148412.08697.777914.1668;1.23682.93326.99297.164118.24258.671916.9154;1.49153.77627.82889.614118.644111.889019.4717];%测试结果集T_test=[-1;0;1];[predict_label,accuracy,dec_values]=svmpredict(T_test,P_test,model);就会得到输出：.*optimizationfinished,#iter=14nu=0.622717obj=-2.593508,rho=0.204546nSV=7,nBSV=1.*optimizationfinished,#iter=15nu=0.617369obj=-2.562849,rho=0.186915nSV=7,nBSV=1.*optimizationfinished,#iter=14nu=0.771043obj=-3.083852,rho=-0.015390nSV=8,nBSV=0TotalnSV=11Accuracy=100%(3/3)(classification)一个重要的PS:当测试集没有预定结果的时候，也就是说，我们只是想用模型对一堆特征集分类而不是验证模型准确度时，将T置为任意值（但长度需要对应上特征集的大小）即可。这时打印predict_label就会显示分类器输出的分类结果。</div>
+
+</body>
+
+</html>

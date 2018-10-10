@@ -1,0 +1,16 @@
+$(function(){
+	$.post("/student/getActivityById.action",{"activityId":$("#activityId").val()},function(data){
+		if(data.msg){
+			$("#activityName").text(data.name);
+			$("#publishTime").text(data.publishTime);
+			$("#publisherName").text(data.publisherName);
+			$("#responsorUser").text(data.responsorUser);
+			$("#content").text(data.description);
+			$("#enrollEndTime").text(data.enrollEndTime);
+			$("#starTime").text(data.starTime);
+			$("#endTime").text(data.endTime);
+	    }else{
+	    	alert("获取活动信息失败！");
+		}		
+	},"json");
+});

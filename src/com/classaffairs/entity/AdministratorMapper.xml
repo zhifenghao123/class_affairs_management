@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.classaffairs.entity.Administrator" >
+	<resultMap id="AdministratorResultMap" type="com.classaffairs.entity.Administrator" >
+	    <id column="administrator_id" property="administratorId" jdbcType="BIGINT" />
+	    <result column="administrator_no" property="administratorNo" jdbcType="VARCHAR" />
+	    <result column="name" property="name" jdbcType="VARCHAR" />
+	    <result column="password" property="password" jdbcType="VARCHAR" />
+	    <result column="type" property="type" jdbcType="INTEGER" />
+	    <result column="create_date" property="createdate" jdbcType="TIMESTAMP" />
+	    <result column="last_date" property="lastdate" jdbcType="TIMESTAMP" />
+   		<result column="state" property="state" jdbcType="INTEGER" />
+   		<result column="managing_school" property="managingSchool" jdbcType="VARCHAR" />
+   		<result column="role_id" property="roleId" jdbcType="BIGINT" />
+  	</resultMap>
+  	<insert id="insert" parameterType="com.classaffairs.entity.Administrator" >
+    insert into administrator
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      administrator_id,
+      administrator_no,
+      name,
+      password,
+      type,
+      create_date,
+      last_date,
+      state,
+      managing_school,
+      role_id,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{administratorId,jdbcType=BIGINT},
+      #{administratorNo,jdbcType=VARCHAR},
+      #{name,jdbcType=VARCHAR},
+      #{password,jdbcType=VARCHAR},
+      #{type,jdbcType=INTEGER},
+      #{createdate,jdbcType=TIMESTAMP},
+      #{lastdate,jdbcType=TIMESTAMP},
+      #{state,jdbcType=INTEGER},
+ 	  #{managingSchool,jdbcType=VARCHAR},
+ 	  #{roleId,jdbcType=BIGINT},
+    </trim>
+  </insert>
+  
+  <update id="update" parameterType="com.classaffairs.entity.Administrator" >
+    update administrator
+    <set >
+      <if test="administratorNo != null" >
+        administrator_no = #{administratorNo,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="lastdate != null" >
+        last_date = #{lastdate,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="managingSchool != null" >
+        managing_school = #{managingSchool,jdbcType=FLOAT},
+      </if>
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where administrator_id = #{administratorId,jdbcType=BIGINT}
+  </update>
+  
+  	<select id="findById" resultMap="AdministratorResultMap" parameterType="Long">
+    	select * from administrator where administrator_id =#{administratorId}
+  	</select>
+  	<select id="findAdministratorByAdministratorNo" resultMap="AdministratorResultMap" parameterType="String">
+    	select * from administrator where administrator_no =#{administratorNo}
+  	</select>
+  	<select id="findAllByName" parameterType="java.util.HashMap"  resultMap="AdministratorResultMap">
+  		select * from administrator where  name like #{name,jdbcType=VARCHAR} 
+  	</select>
+</mapper>

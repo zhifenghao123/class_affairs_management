@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.classaffairs.entity.BlogCategory" >
+  <resultMap id="BlogCategoryResultMap" type="com.classaffairs.entity.BlogCategory" >
+    <id column="blog_category_id" property="blogCategoryId" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="com.classaffairs.entity.BlogCategory" >
+    insert into blog_category
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      blog_category_id,
+      name,
+      level,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{blog_categoryId,jdbcType=BIGINT},
+      #{name,jdbcType=VARCHAR},
+      #{level,jdbcType=INTEGER},
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.classaffairs.entity.BlogCategory" >
+    update `blog_category`
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=INTEGER},
+      </if>
+    </set>
+    where blog_category_id = #{blogCategoryId,jdbcType=BIGINT}
+  </update>
+  <delete id="delete" parameterType="Long">
+    delete from blog_category where blog_category_id = #{blogCategoryId}
+  </delete>
+  <select id="findById" parameterType="Long" resultMap="BlogCategoryResultMap">
+    select * from blog_category where blog_category_id = #{blogCategoryId}
+  </select>
+   <select id="getAll"  resultMap="BlogCategoryResultMap">
+    select * from blog_category where 1 = 1
+  </select>
+</mapper>

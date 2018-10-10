@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.classaffairs.entity.Blog" >
+  <resultMap id="BlogResultMap" type="com.classaffairs.entity.Blog" >
+  <id column="blog_id" property="blogId" jdbcType="BIGINT" />
+    <id column="blog_category_id" property="blogCategoryId" jdbcType="BIGINT" />
+    <id column="owner_id" property="ownerId" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="link_url" property="linkUrl" jdbcType="VARCHAR" />
+    <result column="content_path" property="contentPath" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <insert id="insert" parameterType="com.classaffairs.entity.Blog" >
+    insert into blog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      blog_id,
+      blog_category_id,
+      owner_id,
+      title,
+      link_url,
+      content_path,
+      create_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{blogId,jdbcType=BIGINT},
+      #{blogCategoryId,jdbcType=BIGINT},
+      #{ownerId,jdbcType=BIGINT},
+      #{title,jdbcType=VARCHAR},
+      #{linkUrl,jdbcType=VARCHAR},
+      #{contentPath,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP},
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.classaffairs.entity.Blog" >
+    update `blog`
+    <set >
+    <if test="blogCategoryId != null" >
+        `blog_category_id` = #{blogCategoryId,jdbcType=BIGINT},
+      </if>
+      <if test="ownerId != null" >
+        `owner_id` = #{ownerId,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        `title` = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="linkUrl != null" >
+        `link_url` = #{linkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="contentPath != null" >
+        content_path = #{contentPath,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where blog_id = #{blogId,jdbcType=BIGINT}
+  </update>
+  <delete id="delete" parameterType="Long">
+    delete from blog where blog_id = #{blogId}
+  </delete>
+  <select id="findById" parameterType="Long" resultMap="BlogResultMap">
+    select * from blog where blog_id = #{blogId}
+  </select>
+  <select id="findBlogListBySchoolNo" parameterType="String" resultMap="BlogResultMap">
+    select * from blog where school_id = (select school_id from school where school_no = #{schoolNo})
+  </select>
+  <select id="findExecutiveClassListBySchoolNo" parameterType="String" resultMap="BlogResultMap">
+    select * from blog where blog_no = #{blogNo}
+  </select>
+  <select id="getBlogByState" parameterType="INTEGER" resultMap="BlogResultMap">
+    select * from blog where state = #{state}
+  </select>
+   <select id="getAll"  resultMap="BlogResultMap">
+    select * from blog where 1 = 1
+  </select>
+   <select id="findBlogByFuzzyInformation"  resultMap="BlogResultMap">
+   	select * from blog where 1 = 1
+   	<if test="blogNo != null" >
+        `blog_no` like #{blogNo,jdbcType=VARCHAR},
+    </if>
+    <if test="name != null" >
+        `name` like #{name,jdbcType=VARCHAR},
+    </if>
+  </select>
+   <select id="findBlogByBlogNo" parameterType="String" resultMap="BlogResultMap">
+    select * from blog where blog_no = #{blogNo}
+  </select>
+  <select id="findBlogByBlogName" parameterType="String" resultMap="BlogResultMap">
+    select * from blog where name = #{blogName}
+  </select>
+</mapper>

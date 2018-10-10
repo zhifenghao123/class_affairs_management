@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.classaffairs.entity.Activity">
+	<resultMap id="BaseResultMap" type="com.classaffairs.entity.Activity">
+		<id column = "activity_id" property="activityId" jdbcType="BIGINT"></id>
+	    <result column="name" property="name" jdbcType="VARCHAR" />
+	    <result column="description" property="description" jdbcType="VARCHAR" />
+	    <result column="responsor_no" property="responsorNo" jdbcType="BIGINT" />
+	    <result column="responsor_name" property="responsorName" jdbcType="VARCHAR" />
+	    <result column="type" property="type" jdbcType="INTEGER" />
+	    <result column="star_time" property="starTime" jdbcType="TIMESTAMP" />
+	    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+	    <result column="enroll_end_time" property="enrollEndTime" jdbcType="TIMESTAMP" />
+	    <result column="publisher_no" property="publisherNo" jdbcType="VARCHAR" />
+	    <result column="publisher_name" property="publisherName" jdbcType="VARCHAR" />
+   		<result column="publish_time" property="publishTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<insert id="insert" parameterType="com.classaffairs.entity.Activity" >
+    insert into activity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+	    activity_id, 
+	    name, 
+	    description,
+	    responsor_no, 
+	    responsor_name, 
+	    type,
+	    star_time, 
+	    end_time, 
+	    enroll_end_time,
+	    publisher_no, 
+	    publisher_name, 
+	    publish_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{activityId,jdbcType=BIGINT},
+      #{name,jdbcType=VARCHAR},
+       #{description,jdbcType=VARCHAR},
+      #{responsorNo,jdbcType=BIGINT},
+      #{responsorName,jdbcType=LONGVARCHAR},
+      #{type,jdbcType=VARCHAR},
+      #{starTime,jdbcType=TIMESTAMP},
+      #{endTime,jdbcType=TIMESTAMP},
+      #{enrollEndTime,jdbcType=TIMESTAMP},
+      #{publisherNo,jdbcType=VARCHAR},
+      #{publisherName,jdbcType=VARCHAR},
+      #{publishTime,jdbcType=TIMESTAMP},
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.classaffairs.entity.Activity" >
+    update activity
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="responsorNo != null" >
+        responsor_no = #{responsorNo,jdbcType=BIGINT},
+      </if>
+      <if test="responsorName != null" >
+        responsor_name = #{responsorName,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="starTime != null" >
+        star_time = #{starTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=FLOAT},
+      </if>
+      <if test="enrollEndTime != null" >
+        enroll_end_time = #{enrollEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publisherNo != null" >
+        publisher_no = #{publisherNo,jdbcType=VARCHAR},
+      </if>
+      <if test="publisherName != null" >
+        publisher_name = #{publisherName,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTime != null" >
+        publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where activity_id = #{activityId,jdbcType=BIGINT}
+  </update>
+  <delete id="delete" parameterType="Long">
+		delete from activity where activity_id=#{activityId}
+   </delete>
+	<select id="findById" parameterType="Long" resultMap="BaseResultMap">
+		select * from activity where activity_id=#{activityId}
+	</select>
+  	<select id="findAllActivity" resultMap="BaseResultMap">
+		select * from activity
+	</select>
+
+
+	<select id="findActivityByFuzzyInformation" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+		select * from activity where 1 = 1
+		<if test="keyWordSearch != null &amp;&amp; keyWordSearch != ''">
+			AND title like #{keyWordSearch}
+		</if>
+		<if test="startTimeToSearchPublishTime != null &amp;&amp; startTimeToSearchPublishTime != ''">
+			<![CDATA[and DATE_FORMAT(publish_time, '%Y-%m-%d %H%i%s')>=  DATE_FORMAT(#{startTimeToSearchPublishTime}, '%Y-%m-%d %H%i%s')]]>
+		</if>
+		<if test="endTimeToSearchPublishTime != null &amp;&amp; endTimeToSearchPublishTime != ''">
+			<![CDATA[and DATE_FORMAT(publish_time, '%Y-%m-%d %H%i%s')<=  DATE_FORMAT(#{endTimeToSearchPublishTime}, '%Y-%m-%d %H%i%s')]]>
+		</if>
+		<if test="currentExecutiveClassName != null &amp;&amp; currentExecutiveClassName != ''">
+			AND publisher_no in (select student_no from student where `executive_class_name` in (select name from executiveclass where executive_class_group = (select executive_class_group from executiveclass where name  =#{currentExecutiveClassName,jdbcType=VARCHAR})))
+		</if>
+	</select>
+	
+	<select id="findUserParticipatedActivitysByFuzzyInformation" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+		select * from activity where 1 = 1
+		<if test="keyWordSearch != null &amp;&amp; keyWordSearch != ''">
+			AND title like #{keyWordSearch}
+		</if>
+		<if test="startTimeToSearchPublishTime != null &amp;&amp; startTimeToSearchPublishTime != ''">
+			<![CDATA[and DATE_FORMAT(publish_time, '%Y-%m-%d %H%i%s')>=  DATE_FORMAT(#{startTimeToSearchPublishTime}, '%Y-%m-%d %H%i%s')]]>
+		</if>
+		<if test="endTimeToSearchPublishTime != null &amp;&amp; endTimeToSearchPublishTime != ''">
+			<![CDATA[and DATE_FORMAT(publish_time, '%Y-%m-%d %H%i%s')<=  DATE_FORMAT(#{endTimeToSearchPublishTime}, '%Y-%m-%d %H%i%s')]]>
+		</if>
+		and activity_id in (select activity_id from participation where user_no = #{participatorUserNo}) 
+
+	</select>
+	
+		<select id="findUserPublishedActivityListsByFuzzyInformation" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+		select * from activity where publisher_no = #{publisherUserNo}
+		<if test="keyWordSearch != null &amp;&amp; keyWordSearch != ''">
+			AND title like #{keyWordSearch}
+		</if>
+		<if test="startTimeToSearchPublishTime != null &amp;&amp; startTimeToSearchPublishTime != ''">
+			<![CDATA[and DATE_FORMAT(publish_time, '%Y-%m-%d %H%i%s')>=  DATE_FORMAT(#{startTimeToSearchPublishTime}, '%Y-%m-%d %H%i%s')]]>
+		</if>
+		<if test="endTimeToSearchPublishTime != null &amp;&amp; endTimeToSearchPublishTime != ''">
+			<![CDATA[and DATE_FORMAT(publish_time, '%Y-%m-%d %H%i%s')<=  DATE_FORMAT(#{endTimeToSearchPublishTime}, '%Y-%m-%d %H%i%s')]]>
+		</if>
+	</select>
+	
+</mapper>

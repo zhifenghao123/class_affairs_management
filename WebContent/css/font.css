@@ -1,0 +1,142 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*字体*/
+.gray1{ font-size:12px; color:#555555;}
+.gray1 a{ color:#555555; text-decoration:none;}
+.gray1 a:hover{ color:#C20904;text-decoration:none; }
+
+.gray2{ font-size:14px; font-weight:bold; color:#555555;}
+.gray2 a{ color:#555555; text-decoration:none;}
+.gray2 a:hover{ color:#C20904;text-decoration:none; }
+
+.gray3{ font-size:14px; color:#555555;}
+.gray3 a{ color:#555555; text-decoration:none;}
+.gray3 a:hover{ color:#C20904;text-decoration:none; }
+
+
+.gray5{ font-size:12px; color:#343434;}
+.gray5 a{ font-size:12px; color:#343434; text-decoration:none;}
+.gray5 a:hover{color:#E40002;}
+
+.gray6{ font-size:12px; color:#989898;}
+.gray6 a{ color:#989898; text-decoration:none;}
+.gray6 a:hover{ color:#C20904;text-decoration:none; }
+
+
+.gray7{ font-size:12px; font-weight:bold; color:#555555;}
+.gray7 a{ color:#555555; text-decoration:none;}
+.gray7 a:hover{ color:#C20904;text-decoration:none; }
+
+.gray8{ font-size:16px; font-weight:bold; color:#989898;}
+.gray8 a{ color:#989898; text-decoration:none;}
+.gray8 a:hover{ color:#C20904;text-decoration:none; }
+
+.gray9{ font-size:12px; color:#555555; text-decoration:line-through;}
+.gray9 a{ color:#555555; text-decoration:none;}
+.gray9 a:hover{ color:#C20904;text-decoration:none; }
+
+
+.gray4{ font-size:12px; font-weight:bold; color:#000;}
+.gray4 a{ color:#000; font-weight:bold; text-decoration:none;}
+.gray4 a:hover{ color:#FFF;text-decoration:none; }
+
+.black{ font-size:12px; color:#000;}
+.black a{ color:#000; text-decoration:none;}
+.black a:hover{  color:#C20904;  text-decoration:none;}
+
+.black2{ font-size:14px; color:#000; font-weight:bold;}
+.black2 a{ color:#000; text-decoration:none;}
+.black2 a:hover{  color:#C20904;  text-decoration:none;}
+
+.black3{ font-size:20px; color:#000; font-weight:bold;}
+.black3 a{ color:#000; text-decoration:none;}
+.black3 a:hover{  color:#C20904;  text-decoration:none;}
+
+
+.blue{ font-size:12px; color:#0134CE;}
+.blue a{ color:#0134CE; text-decoration:none;}
+.blue a:hover{  color:#C20904;  text-decoration:none;}
+
+.red1{ font-size:12px; color:#C20904;}
+.red1 a{ color:#C20904; text-decoration:none;}
+.red1 a:hover{ color:#000;text-decoration:none; }
+
+.red2{ font-size:12px; color:#555;}
+.red2 a{ color:#C20904; text-decoration:none;}
+.red2 a:hover{ color:#000;text-decoration:none; }
+
+.red3{ font-size:12px; color:#CB0101;}
+.red4{ font-size:14px; color:#CB0101;  font-weight:bold;}
+
+.red3 a,.red4 a{ color:#CB0101; text-decoration:none;}
+.red3 a:hover,.red4 a:hover{ color:#000; text-decoration:none; }
+
+.red5{ font-size:12px; font-weight:bold; color:#C20904;}
+.red5 a{ color:#C20904; text-decoration:none;}
+.red5 a:hover{ color:#000;text-decoration:none; }
+
+.red6{ font-size:20px; font-weight:bold; color:#C20904;}
+.red6 a{ color:#C20904; text-decoration:none;}
+.red6 a:hover{ color:#000;text-decoration:none; }
+
+.red7{ font-size:16px; color:#CB0101;  font-weight:bold;}
+.red7 a{ color:#CB0101; text-decoration:none;}
+.red7 a:hover{ color:#000; text-decoration:none; }
+
+
+.red8{ font-size:24px; font-weight:bold; color:#C20904;}
+.red8 a{ color:#C20904; text-decoration:none;}
+.red8 a:hover{ color:#000;text-decoration:none; }
+
+
+
+.orange{ font-size:14px; color:#F60; font-weight:bold;}
+.orange a{ font-size:14px; color:#F60; font-weight:bold;text-decoration:none;}
+.orange a:hover{ font-size:14px; color:#000; text-decoration:none;}
+
+
+.orange1{ font-size:12px; color:#F60; font-weight:bold;}
+.orange1 a{ font-size:12px; color:#F60; font-weight:bold;text-decoration:none;}
+.orange1 a:hover{ font-size:12px; color:#000; text-decoration:none;}
+
+.orange2{ font-size:12px; color:#F60;}
+.orange2 a{ font-size:12px; color:#F60; text-decoration:none;}
+.orange2 a:hover{ font-size:12px; color:#000; }
+
+
+
+
+.white { font-size:14px; color:#FFF; font-weight:bold;}
+.white  a{ font-size:14px; color:#FFF; font-weight:bold; text-decoration:none;}
+.white  a:hover{ font-size:14px; color:#000; font-weight:bold;}
+
+.white1 { font-size:12px; color:#FFF;}
+.white1  a{ font-size:12px; color:#FFF; text-decoration:none; }
+.white1  a:hover{ font-size:12px; color:#000; font-weight:bold;}
+
+.white2{font-size:14px; color:#FFF; text-decoration:none;}
+.white2 a{font-size:14px; color:#FFF; text-decoration:none;}
+.white2 a:hover{background:#5A0000;}
+
+.white3{font-size:20px; color:#FFF; font-weight:bold; text-decoration:none;}
+.white3 a{font-size:20px; color:#FFF; text-decoration:none;}
+.white3 a:hover{ color:#DDDDDD;}
+
+.white4 { font-size:16px; color:#FFF; font-weight:bold;}
+.white4  a{ font-size:16px; color:#FFF; font-weight:bold; text-decoration:none;}
+.white4  a:hover{ font-size:16px; color:#000; font-weight:bold;}
+ 
+/*印象字体颜色*/
+.ys1{ color:#F0F;}
+.ys2{ color:#390;}
+.ys3{ color:#F60;}
+.ys4{ color:#63F;}
+.ys5{ color:#960;}
+.ys6{ color:#09F;}
+
+.font-12{font-size:12px;}
+
+.blue4{ font-size:12px; font-weight:bold; color:#0134CE;}
+.blue4 a{ color:#0134CE; text-decoration:none;}
+.blue4 a:hover{  color:#C20904;  text-decoration:none;}

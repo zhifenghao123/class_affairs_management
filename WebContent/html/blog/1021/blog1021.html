@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="/img/favicon.ico" type="image/x-icon" rel="shortcut icon" /> 
+<title></title>
+<style type="text/css">
+#static_introduce table{width:520px !important;}
+#static_introduce{word-wrap:break-word;word-break:break-all;}
+</style>
+</head>
+<body>
+<div id="static_introduce">//读取db.properties文件
+      Properties props = new Properties();      /**
+       * . 代表java命令运行的目录
+       * 在java项目下，. java命令的运行目录从项目的根目录开始
+       * 在web项目下， . java命令的而运行目录从tomcat/bin目录开始
+       * 所以不能使用点.
+       */
+      //FileInputStream in = new FileInputStream(&quot;./src/db.properties&quot;);
+
+      /**
+       * 使用类路径的读取方式
+       * / : 斜杠表示classpath的根目录
+       *   在java项目下，classpath的根目录从bin目录开始
+       *   在web项目下，classpath的根目录从WEB-INF/classes目录开始
+       */
+      //获取字节流文件
+      InputStream in = JdbcUtil.class.getResourceAsStream(&quot;/db.properties&quot;);      //加载文件
+      props.load(in);      //读取信息
+      url = props.getProperty(&quot;url&quot;);
+      user = props.getProperty(&quot;user&quot;);
+      password = props.getProperty(&quot;password&quot;);
+      driverClass = props.getProperty(&quot;driverClass&quot;);</div>
+
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>JQuery弹出层效果</title>
+
+<link rel="stylesheet" type="text/css" href="/common/jquery-ui/jquery-ui.min.css"/>
+<script type="text/javascript" src="/js/common/jquery.min.js"></script>
+<script type="text/javascript" src="/common/jquery-ui/jquery-ui.min.js"></script>
+
+<style>
+	body { font-size: 75%; }
+	label, input { display:block; }
+	input.text { margin-bottom:12px; width:95%; padding: .4em; }
+	fieldset { padding:0; border:0; margin-top:15px; }
+	div#users-contain { width: 350px; margin: 20px 0; }
+	div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+	div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+	.ui-dialog .ui-state-error { padding: .3em; }
+	.validateTips { border: 1px solid transparent; padding: 0.3em; }
+</style>
+	<script>
+	$(function() {
+		var txtname = $( "#txtname" ),
+			txtmake = $( "#txtmake" ),
+			allFields = $( [] ).add( txtname ).add( txtmake ),
+			tips = $( ".validateTips" );
+
+		function updateTips( t ) {
+			tips
+				.text( t )
+				.addClass( "ui-state-highlight" );
+			setTimeout(function() {
+				tips.removeClass( "ui-state-highlight", 1500 );
+			}, 500 );
+		}
+
+		function checkLength( o, n, min, max ) {
+			if ( o.val().length > max || o.val().length < min ) {
+				o.addClass( "ui-state-error" );
+				updateTips( n + "字符长度在" +min + " 到 " + max + "之间。请检查！" );
+				return false;
+			} else {
+				return true;
+			}
+		}
+		
+		$( "#dialog-form" ).dialog({
+			autoOpen: false,
+			height: 310,
+			width: 360,
+			modal: true,
+			buttons: {
+				"确定": function() {
+					//表单验证部分
+					var bValid = true;
+					allFields.removeClass( "ui-state-error" );
+
+					bValid = bValid && checkLength( txtname, "相册名称", 1, 16 );
+					bValid = bValid && checkLength( txtmake, "相册描述", 5, 20 );
+
+					if ( bValid ) {
+						$( "#users tbody" ).append( "<tr>" +
+							"<td>" + txtname.val() + "</td>" +
+							"<td>" + txtmake.val() + "</td>" +
+						"</tr>" );
+						
+						//点击确定之后的操作
+						alert($( "#txtname" ).val());
+						
+						//关闭窗口
+						$( this ).dialog( "close" );
+					}
+				},
+				"取消": function() {
+					$( this ).dialog( "close" );
+				}
+			},
+			close: function() {
+				allFields.val( "" ).removeClass( "ui-state-error" );
+			}
+		});
+
+		$( "#popdiv" )
+			.click(function() {
+				$( "#dialog-form" ).dialog( "open" );
+			});
+	});
+	</script>
+</head>
+<body>
+	<a id="popdiv" href="javascript:;">上传视频</a>
+	
+	
+	<div  id="dialog-form" title="创建相册" class="">
+		<form>
+			<fieldset>
+				<label for="txtname">相册名称</label>
+				<input type="text" name="txtname" id="txtname" class="text ui-widget-content ui-corner-all" />
+				<label for="txtmake">相册描述</label>
+				<textarea id="txtmake" name="txtmake" style="width: 310px;height: 50px" class="text ui-widget-content ui-corner-all"></textarea>
+			</fieldset>
+		</form>
+		<p class="validateTips"></p>
+	</div>
+</body>
+</html>

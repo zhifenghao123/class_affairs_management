@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.classaffairs.entity.OperationLog" >
+  <resultMap id="OperationLogResultMap" type="com.classaffairs.entity.OperationLog" >
+    <id column="operation_log_id" property="operationLogId" jdbcType="BIGINT" />
+    <result column="operator_id" property="operator_id" jdbcType="BIGINT" />
+    <result column="operator_ip" property="operator_ip" jdbcType="VARCHAR" />
+    <result column="operate_time" property="operate_time" jdbcType="TIMESTAMP" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="operation_name" property="operation_name" jdbcType="VARCHAR" />
+    <result column="operate_arguments" property="operateArguments" jdbcType="VARCHAR" />
+    <result column="operation_result" property="operationResult" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    operation_log_id, operator_id,  operator_ip, operate_time, 
+    type, operation_name, operate_arguments, operation_result
+  </sql>
+  
+   <insert id="insert" parameterType="com.classaffairs.entity.OperationLog" >
+    insert into operation_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      operation_log_id,
+      operator_id,
+      operator_ip,
+      operate_time,
+      type,
+      operation_name,
+      operate_arguments,
+      operation_result,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{operationLogId,jdbcType=BIGINT},
+      #{operatorId,jdbcType=BIGINT},
+      #{operatorIp,jdbcType=VARCHAR},
+      #{operateTime,jdbcType=TIMESTAMP},
+      #{type,jdbcType=VARCHAR},
+      #{operationName,jdbcType=VARCHAR},
+      #{operateArguments,jdbcType=VARCHAR},
+      #{operationResult,jdbcType=VARCHAR},
+    </trim>
+  </insert>
+  
+  <update id="update" parameterType="com.classaffairs.entity.OperationLog" >
+    update operation_log
+    <set >
+      <if test="operatorId != null" >
+        operator_id = #{operatorId,jdbcType=BIGINT},
+      </if>
+      <if test="operatorIp != null" >
+        operator_ip = #{operatorIp,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="operationName != null" >
+        operation_name = #{operationName,jdbcType=VARCHAR},
+      </if>
+      <if test="operateArguments != null" >
+        operate_arguments = #{operateArguments,jdbcType=VARCHAR},
+      </if>
+      <if test="operationResult != null" >
+        operation_result = #{operationResult,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where operation_log_id = #{operationLogId,jdbcType=BIGINT}
+  </update>
+  
+  <delete id="delete" parameterType="Long">
+		delete from operation_log where operation_log_id=#{operationLogId}
+  </delete>
+  
+  <select id="getById" parameterType="Long" resultMap="OperationLogResultMap">
+  	select <include refid="Base_Column_List"/> from operation_log where operation_log_id=#{operationLogId}
+  </select>
+  
+  <select id="getAll" resultMap="OperationLogResultMap">
+  	select <include refid="Base_Column_List"/> from operation_log order by operate_time DESC
+  </select>
+  
+<!--   <select id="getOperationLogByOperatorNameAndDate" parameterType="HashMap" resultMap="OperationLogResultMap">
+		select * from operation_log 
+		<if test="operatorName!='' ">
+			<choose>
+				<when test="startDate!='' and endDate!='' ">
+					where operator_id in(select interioremployee_id from interioremployee where realname like #{operatorName}) and operate_time between '${startDate}' and '${endDate}'
+				</when>
+				<when test="startDate!='' and endDate=='' ">
+					where operator_id in(select interioremployee_id from interioremployee where realname like #{operatorName}) and operate_time &gt; '${startDate}'
+				</when>
+				<when test="startDate=='' and endDate!='' ">
+					where operator_id in(select interioremployee_id from interioremployee where realname like #{operatorName}) and operate_time &lt; '${endDate}'
+				</when>
+				<when test="startDate=='' and endDate=='' ">
+					where operator_id in(select interioremployee_id from interioremployee where realname like #{operatorName})
+				</when>
+			</choose>
+		</if>
+		<if test="operatorName=='' ">
+			<choose>
+				<when test="startDate!='' and endDate!='' ">
+					where operate_time between '${startDate}' and '${endDate}'
+				</when>
+				<when test="startDate!='' and endDate=='' ">
+					where operate_time &gt; '${startDate}'
+				</when>
+				<when test="startDate=='' and endDate!='' ">
+					where operate_time &lt; '${endDate}'
+				</when>
+				<when test="startDate=='' and endDate=='' "></when>
+			</choose>
+		</if>
+		order by operate_time DESC
+	</select> -->
+  
+ 
+</mapper>

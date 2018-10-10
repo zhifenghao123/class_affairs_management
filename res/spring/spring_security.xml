@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security-3.0.3.xsd">
+
+	<global-method-security pre-post-annotations="enabled"/>
+
+	<http auto-config="true" entry-point-ref="loginUrlEntryPoint">
+    <!-- 该路径下的资源不用过滤 -->
+    <!-- 不要过滤图片等静态资源，其中**代表可以跨越目录，*不可以跨越目录。-->
+        <intercept-url pattern="/css/**"  filters="none"/>
+		<intercept-url pattern="/img/**"  filters="none"/>
+		<intercept-url pattern="/js/**"  filters="none"/>
+		<intercept-url pattern="/error/**"  filters="none"/>
+		<intercept-url pattern="/html/**"  filters="none"/>
+		<intercept-url pattern="/upload/**"  filters="none"/>
+
+		<custom-filter before="FILTER_SECURITY_INTERCEPTOR" ref="classAffairAbstractSecurityInterceptor" />
+		<form-login login-page='/' authentication-success-handler-ref="classAffairAuthenticationSuccessHandler"/>
+		<logout invalidate-session="true" logout-success-url="/" logout-url="/j_spring_security_logout" />
+		<http-basic />
+		<access-denied-handler ref="accessDeniedHandler"/>
+	</http>
+
+<!-- authentication-success-handler-ref="togymAuthenticationSuccessHandler" -->
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref='myUserDetailsService' />
+	</authentication-manager>
+	<!-- 处理无权限操作 -->
+	<beans:bean id="accessDeniedHandler"   class="com.classaffairs.common.security.ClassAffairAccessDeniedHandler" />
+	<!-- 认证切入点，这里使用它的目的是保证当用户登录之前就访问前后台时，会跳转到不同的登录页面 -->  
+    <beans:bean id="loginUrlEntryPoint" class="com.classaffairs.common.security.ClassAffairAuthenticationEntryPoint" />
+    
+	<beans:bean id="myUserDetailsService" class="com.classaffairs.common.security.ClassAffairUserDetailsService"></beans:bean>
+	<beans:bean id="classAffairAuthenticationSuccessHandler" class="com.classaffairs.common.security.ClassAffairAuthenticationSuccessHandler"></beans:bean>
+
+
+	<beans:bean id="classAffairFilterInvocationSecurityMetadataSource" class="com.classaffairs.common.security.ClassAffairFilterInvocationSecurityMetadataSource">
+		<beans:constructor-arg index="0" type="com.classaffairs.service.ApplicationService" ref="applicationService"></beans:constructor-arg>
+		<beans:constructor-arg index="1" type="com.classaffairs.service.AuthorityRetrieveService" ref="authorityRetrieveService"></beans:constructor-arg>
+	</beans:bean>
+	<beans:bean id="authorityRetrieveService" class="com.classaffairs.service.impl.AuthorityRetrieveServiceImpl"></beans:bean>
+	<beans:bean id="applicationService" class="com.classaffairs.service.impl.ApplicationServiceImpl"></beans:bean>
+	<beans:bean id="accessDecisionManager" class="com.classaffairs.common.security.ClassAffairAccessDecisionManager"></beans:bean>
+
+	<beans:bean id="classAffairAbstractSecurityInterceptor" class="com.classaffairs.common.security.ClassAffairAbstractSecurityInterceptor" autowire="byType">
+		<beans:property name="authenticationManager" ref="authenticationManager" />
+		<beans:property name="accessDecisionManager" ref="accessDecisionManager" />
+		<beans:property name="securityMetadataSource" ref="classAffairFilterInvocationSecurityMetadataSource" />
+	</beans:bean>
+</beans:beans>
+	

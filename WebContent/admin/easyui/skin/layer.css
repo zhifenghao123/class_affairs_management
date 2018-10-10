@@ -1,0 +1,26 @@
+
+*html{background-image:url(about:blank);background-attachment:fixed;}
+
+/** common **/
+.xubox_shade, .xubox_layer{position:fixed; _position:absolute;}
+.xubox_shade{top:0; left:0; width:100%; height:100%; _height:expression(document.body.offsetHeight+"px");}
+.xubox_layer{top:150px; left:50%; height:auto; width:310px; margin-left:-155px;}
+.xubox_border, .xubox_title, .xubox_title i, .xubox_page, .xubox_iframe, .xubox_title em, .xubox_close, .xubox_msgico, .xubox_moves{position:absolute;}
+.xubox_border{border-radius: 5px;}
+.xubox_title{left:0; top:0;}
+.xubox_main{position:relative; height:100%; _float:left;}
+.xubox_page{top:0; left:0;}
+.xubox_load{background:url(default/xubox_loading0.gif) #fff center center no-repeat;}
+.xubox_loading{display:block; float:left; text-decoration:none; color:#FFF; _float:none; }
+.xulayer_png32{background:url(default/xubox_ico0.png) no-repeat;}
+.xubox_moves{border:3px solid #333; cursor:move; opacity:0.7; filter:alpha(opacity=70);}
+
+.xubox_msgico{width:32px; height:32px; top:52px; left:15px; background:url(default/xubox_ico0.png) no-repeat;}
+
+.xubox_close0{ right:10px; top:10px; width:14px; height:14px; background-position: -31px -7px; cursor:pointer; overflow:hidden;}
+.xubox_close0:hover{background-position:-51px -7px;}
+.xubox_close1{ right:-20px; top:-21px; width:34px; height:30px; background-position: -5px -252px; cursor:pointer; overflow:hidden;  _right:3px; _top:3px; _width:14px; _height:14px; _background-position:-31px -7px;}
+.xubox_close1:hover{ background-position:-44px -252px; _background-position:-51px -7px;}
+
+
+

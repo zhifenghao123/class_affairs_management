@@ -1,0 +1,139 @@
+/* CSS Document */
+body {background:#f2f2f2;}
+
+/*登录注册界面#FFFF*/
+.loginbox{background:#e8e8e8;-moz-border-radius:3px; -webkit-border-radius:3px;border-radius:3px;padding:5px;margin:60px auto 60px auto ; width:900px;}
+.login_in{border:1px solid #e1e1e1;height:300px; width:898px; *overflow:hidden; background:#FFF; }
+.loginl{width:570px; height:300px; margin:0; float:left;background:url(/img/loginbg.jpg) no-repeat;}
+
+.loginr{width:320px; height:300px; float:right;}
+.logtab{width:260px; margin:10px auto; line-height:20px;}
+.logtab td{ line-height:20px;}
+
+.log_in,.log_mm{width:260px; height:30px; line-height:30px; padding:0; margin:0 0 20px 0;padding-top:4px!important; font-size:12px; border:1px solid #ccc; padding-left:17px;}
+.log_in{ background:url(/img/login.jpg) no-repeat 0px 2px #fff;}
+.log_mm{ background:url(/img/login.jpg) no-repeat 0px -26px #fff;}
+
+
+
+
+/*按钮*/
+.buttred{width:70px; height:24px; line-height:24px; text-align:center; background:url(/img/manage/buttonbg.jpg) no-repeat; border:0; font-weight:bolder; font-size:12px; color:#ffffff;  cursor:pointer;}
+.buttred:hover{ color:#000000;}
+
+.butt1{width:80px; height:25px; line-height:25px; border:0; background:url(/img/manage/buttonbg3.jpg) no-repeat; margin:0 5px; cursor:pointer; color:#000; font-weight:bold; }
+.butt1:hover{ color:#C00;}
+
+
+
+.check{ margin:0 10px 0 0;}
+
+/******2014.6.19补*********/
+.loglist{ width:260px; height:20px;}
+.loglist li{ width:55px; height:20px;  float:left; list-style:none; }
+.loglist li.qq{ background:url(/img/ico_qzone_16x16.png) left 2px no-repeat;}
+.loglist li.rr{ background:url(/img/ico_renren_16x16.png) left 2px no-repeat;}
+.loglist li.kx{ background:url(/img/ico_kaixin.gif) left 2px no-repeat;}
+.loglist li.zf{ background:url(/img/ico-zhi.gif) left 2px no-repeat;}
+.loglist li.qq a,.loglist li.rr a,.loglist li.kx a,.loglist li.zf a{ display:block; height:20px; line-height:20px; text-indent:20px; text-align:left;}
+.loglist li.zf a{ width:60px;}
+
+.loglist li.more{ float:left; width:45px;  height:20px; position:relative; z-index:1; }
+.loglist li.more a{ display:block; height:20px; line-height:20px; width:45px; text-indent:0px;background:url(/img/updown.jpg) right bottom no-repeat;}
+.loglist li.more a:hover{background:url(/img/updown.jpg) right top no-repeat;}
+#morlog{ width:60px; position:absolute; left:0; top:29px;_top:25px; z-index:1000;}
+#morlog a{ display:block; width:60px; text-align:left; text-indent:10px; background:none; background-color:#FFF; list-style:none;  height:25px; line-height:25px; text-align:left; border-bottom:1px solid #e2e2e2;}
+
+/******2014.6.19补*********/
+
+
+/*注册*/
+.register_in{border:1px solid #e1e1e1; width:897px;  background:#FFF; overflow:hidden;}
+.zctop{ width:860px; height:30px; border-bottom:1px solid #E2E2E2; margin:20px auto 10px auto; position:relative; z-index:1; }
+.zcbox{ width:400px; height:30px;position:absolute; left:0; top:1px; z-index:2;}
+.zcbox ul{ width:400px; height:30px; }
+.zcbox li{ width:auto; height:30px;  margin:0 10px 0 0;_margin:0 5px 0 0; float:left;  text-align:center;}
+.zcbox li a{ display:block; width:92px; height:30px; line-height:30px;background:#EFEFEF;font-size:12px; color:#000; font-weight:bold;  text-decoration:none;}
+.zcbox li a:hover{ display:block; width:90px; height:28px; line-height:28px; border:1px solid #CFCFCF; border-bottom:1px solid #EFEFEF; background:url(/img/navbg.jpg) repeat-x;  color:#C20904; text-decoration:none;}
+.zcbox li a.ontop{ display:block; width:90px; height:28px; line-height:28px; border:1px solid #CFCFCF;  border-bottom:1px solid #EFEFEF; background:url(/img/navbg.jpg) repeat-x; color:#C20904; }
+
+.zctop .othlist{width:220px; height:85px; padding:10px; line-height:20px;  position:absolute; left:620px; top:0px; _top:0; z-index:2; border:1px solid #FC9; background:#FFF;}
+.plog{display:block; height:30px; line-height:30px; width:100%; margin-bottom:5px;}
+.pmenb{display:block; height:24px; line-height:24px; width:100%; margin-bottom:5px;}
+
+.leiline{ width:860px; height:30px; line-height:30px; margin:20px 0;background:#f2f2f2; text-align:left; text-indent:20px; }
+.regtab{ width:90%; margin:0 auto 20px;}
+.regtab td{ height:40px; line-height:40px; padding:0 5px;}
+
+.regput{width:200px; height:20px; line-height:20px; padding:0;padding-top:2px!important;font-size:12px; border:1px solid #ccc; }
+.selebox{ height:20px; line-height:20px; padding:0; margin: 0 20px 0 0;font-size:12px; border:1px solid #ccc; z-index:1;}
+
+.scynbox{width:560px; height:auto; clear:both; position:relative; z-index:1;}
+.scynbox span{ display:block; width:auto; height:35px; line-height:35px; padding:0 10px; white-space:nowrap; float:left; z-index:1  }
+.scynbox input{ margin:5px 5px 0 0; z-index:1}
+
+/*运动项目弹出层*/
+.tccwin{
+	position:absolute;
+	left:0;
+	top:75px;
+	z-index:9999;
+	width:460px;
+	_width:462px;
+	overflow:hidden;
+	border:4px solid #D9D9D9;
+	background:#fff;
+	padding:1px;
+}
+.yntit2{ width:460px; height:30px; line-height:30px; text-indent:30px; background:url(/img/manage/ico-ring.jpg) no-repeat; border-bottom:1px solid #ccc; margin:0 0 10px 0; clear:both;  }
+.yntit3{ width:460px; height:30px; line-height:30px; text-align:center;  border-top:1px solid #ccc; margin:10px 0; clear:both; padding:10px 0;  }
+.yntitl{ width:460px; _width:462px;height:30px; border-bottom:1px solid #ccc; margin:0 0 10px 0; clear:both;  }
+.yntitl ul{ width:460px; _width:462px; height:30px; clear:both;overflow:hidden;}
+.yntitl ul li{ float:left; width:90px; height:30px;  margin:0px 1px;}
+.yntitl ul li a{ display:block; width:90px; height:30px;line-height:30px;  background:#F5F5F5;text-align:center;}
+.yntitl ul li a:hover{  background:#E54044; }
+.yntitl ul li.onred a{  background:#E54044; color:#fff; }
+.yntitl ul li.onred a:hover{  background:#F5F5F5; color:#000; }
+
+.ynxl{ width:460px; height:auto; margin:0 0 0 10px;}
+.ynxl span{display:block; width:auto; height:35px; line-height:35px; vertical-align:middle; padding:0 10px; white-space:nowrap; float:left; z-index:2  }
+.ynxl input{ margin:0 5px 0 0;}
+
+.qrbut{width:247px; height:24px; line-height:24px; background:url(/img/manage/buttonbg2.jpg) no-repeat; font-size:12px; border:0; font-weight:bolder; font-size:12px; color:#ffffff;  cursor:pointer; margin:10px;}
+.qrbut:hover{ color:#000;}
+
+
+.aerbox{width:580px; height:auto; margin:10px 0; clear:both; overflow:hidden;}
+
+
+/*提示文字样式*/
+.tshok,.tsh,.tshwrong{ display:block; width:auto; min-width:100px; max-width:100% padding:0; padding-left:30px; margin:5px 0; float:left;}
+.tshok{ background:url(/img/manage/reg_icoji.gif) no-repeat 0 0; }
+.tsh{background:url(/img/manage/reg_icoji.gif) no-repeat 0 -120px; }
+.tshwrong{ background:url(/img/manage/reg_icoji.gif) no-repeat 0 -240px; }
+
+
+
+/*弹出层样式*/
+.laybox{width:355px; height:315px;}
+.laytit{width:355px; height:45px; background:#990000; margin:0; overflow:hidden;}
+.layname{width:100px; height:45px; line-height:45px; text-align:left; text-indent:20px; color:#fff; font-size:20px; font-weight:bold; float:left;}
+.layclose{width:40px; height:45px; line-height:45px;   text-align:left;  float:right;}
+.layinr{width:353px;_width:355px; height:269px; border:1px solid #ddd; border-top:none; margin:0; overflow:hidden; background:#fff;  }
+
+
+/*弹出层样式（邀请加入）*/
+.invilay{width:500px; height:auto;}
+.invilaytit{width:500px; height:45px; background:#990000; margin:0; overflow:hidden;}
+.invilayname{width:150px; height:45px; line-height:45px; text-align:left; text-indent:20px; color:#fff; font-size:20px; font-weight:bold; float:left;}
+.invilayinr{width:498px;_width:500px; height:auto; line-height:30px; border:1px solid #ccc; border-top:none; margin:0; overflow:hidden;   background:#FFFFE5;}
+.inviput{width:350px; height:25px; line-height:25px; padding:0; margin:0 0 15px 0;padding-top:4px!important; font-size:12px; color:#999; border:1px solid #FC6; text-indent:5px; }
+
+.yqxbox{width:350px; overflow:hidden; clear:both; }
+.yqxbox ul{ width:350px; height:auto; padding:0; }
+.yqxbox li{ list-style:none; height:30px; line-height:30px; text-indent:5px;  margin:0 0 5px 0; text-align:left;  background:#FC9; }
+.yqxbox li:hover{ background:url(/img/manage/close.jpg) no-repeat right center;}
+.yqxlas{width:100%; height:50px; background:#eCeCeC; text-align:center;}
+.yqxbut{width:120px; height:30px; line-height:30px; text-align:center; background:#E64243; border:0; font-weight:bolder; font-size:12px; color:#ffffff;  cursor:pointer;margin-top:10px;}
+.yqxbut:hover{ color:#000000;}
+

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.classaffairs.entity.OnlineBehavior">
+	<resultMap id="BaseResultMap" type="com.classaffairs.entity.OnlineBehavior">
+		<id column = "online_behavior_id" property="onlineBehaviorId" jdbcType="BIGINT"></id>
+		<result column="user_no" property="userNo" jdbcType="VARCHAR" />
+	    <result column="user_ip" property="userIp" jdbcType="VARCHAR" />
+	    <result column="online_behavior_name" property="onlineBehaviorName" jdbcType="VARCHAR" />
+	    <result column="type" property="type" jdbcType="INTEGER" />
+	    <result column="state" property="state" jdbcType="INTEGER" />
+	    <result column="record_time" property="recordTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<insert id="insert" parameterType="com.classaffairs.entity.OnlineBehavior" >
+    insert into online_behavior
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+	    online_behavior_id, 
+	    user_no,
+	    user_ip,
+	    online_behavior_name, 
+	    type,
+	    state, 
+	    record_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{onlineBehaviorId,jdbcType=BIGINT},
+      #{userNo,jdbcType=VARCHAR},
+       #{userIp,jdbcType=VARCHAR},
+      #{onlineBehaviorName,jdbcType=VARCHAR},
+      #{type,jdbcType=INTEGER},
+      #{state,jdbcType=INTEGER},
+       #{recordTime,jdbcType=TIMESTAMP},
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.classaffairs.entity.OnlineBehavior" >
+    update online_behavior
+    <set >
+      <if test="userNo != null" >
+        user_no = #{userNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userIp != null" >
+        user_ip = #{userIp,jdbcType=VARCHAR},
+      </if>
+      <if test="onlineNehaviorName != null" >
+        online_behavior_name = #{onlineBehaviorName,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="recordTime != null" >
+        record_time = #{recordTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where online_behavior_id = #{onlineBehaviorId,jdbcType=BIGINT}
+  </update>
+  <delete id="delete" parameterType="Long">
+		delete from online_behavior where online_behavior_id=#{onlineBehaviorId}
+   </delete>
+	<select id="findById" parameterType="Long" resultMap="BaseResultMap">
+		select * from online_behavior where online_behaviorBd=#{online_behaviorId}
+	</select>
+  	<select id="findAllOnlineBehavior" resultMap="BaseResultMap">
+		select * from online_behavior
+	</select>
+
+	<select id="findOnlineBehaviorByFuzzyInformation" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+		select * from online_behavior where state = 0
+		<if test="userNo != null &amp;&amp; userNo != ''">
+			AND user_no like #{userNo}
+		</if>
+		<if test="type != 0">
+			AND type = #{type}
+		</if>
+		order by record_time desc
+	</select>
+
+</mapper>

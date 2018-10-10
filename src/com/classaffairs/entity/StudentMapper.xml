@@ -1,0 +1,862 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.classaffairs.entity.Student" >
+  <resultMap id="StudentResultMap" type="com.classaffairs.entity.Student" >
+    <id column="student_id" property="studentId" jdbcType="BIGINT" />
+    <result column="student_no" property="studentNo" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
+    <result column="birthplace" property="birthplace" jdbcType="VARCHAR" />
+    <result column="home_address" property="homeAddress" jdbcType="VARCHAR" />
+    <result column="ethnic" property="ethnic" jdbcType="VARCHAR" />
+    <result column="political_landscape" property="politicalLandscape" jdbcType="INTEGER" />
+    <result column="id_card_no" property="IdCardNo" jdbcType="VARCHAR"/>
+    <result column="access_type" property="accessType" jdbcType="INTEGER" />
+    <result column="undergraduate_college" property="undergraduateCollege" jdbcType="VARCHAR" />
+    <result column="undergraduate_enddate" property="undergraduateEnddate" jdbcType="TIMESTAMP" />
+    <result column="grade_no" property="gradeNo" jdbcType="VARCHAR" />
+    <result column="school_no" property="schoolNo" jdbcType="VARCHAR" />
+    <result column="major_no" property="majorNo" jdbcType="VARCHAR" />
+    <result column="cultivation_type" property="cultivationType" jdbcType="INTEGER" />
+    <result column="executive_class_name" property="executiveClassName" jdbcType="VARCHAR" />
+    <result column="department_no" property="departmentNo" jdbcType="VARCHAR" />
+    <result column="laboratory_no" property="laboratoryNo" jdbcType="VARCHAR" />
+    <result column="tutor_name" property="tutorName" jdbcType="VARCHAR" />
+    <result column="research_direction" property="researchDirection" jdbcType="VARCHAR" />
+    <result column="degree_course_score" property="degreeCourseScore" jdbcType="FLOAT" />
+    <result column="degree_course_rank" property="degreeCourseRank" jdbcType="INTEGER" />
+    <result column="all_course_score" property="allCourseScore" jdbcType="FLOAT" />
+    <result column="all_course_rank" property="allCourseRank" jdbcType="INTEGER" />
+    <result column="cet4_score" property="cet4Score" jdbcType="INTEGER" />
+    <result column="cet6_score" property="cet6Score" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="is_laboratory_leader" property="isLaboratorLeader" jdbcType="INTEGER" />
+    <result column="is_department_leader" property="isDepartmentLeader" jdbcType="INTEGER" />
+    <result column="is_monitor" property="isMonitor" jdbcType="INTEGER" />
+    <result column="is_school_leader" property="isSchoolLeader" jdbcType="INTEGER" />
+    <result column="telephone_no_frequse" property="telephoneNoFrequse" jdbcType="VARCHAR" />
+    <result column="telephone_no_frequse_ispublic" property="telephoneNoFrequseIsPublic" jdbcType="INTEGER" />
+    <result column="telephone_no_backup" property="telephoneNoBackup" jdbcType="VARCHAR" />
+    <result column="telephone_no_backup_ispublic" property="telephoneNoBackupIsPublic" jdbcType="INTEGER" />
+    <result column="emai_no" property="emaiNo" jdbcType="VARCHAR" />
+    <result column="emai_no_ispublic" property="emaiNoIspublic" jdbcType="INTEGER" />
+    <result column="qq_no" property="qqNo" jdbcType="VARCHAR" />
+    <result column="qq_no_ispublic" property="qqNoIsPublic" jdbcType="INTEGER" />
+    <result column="wechat_no" property="wechatNo" jdbcType="VARCHAR" />
+    <result column="wechat_no_ispublic" property="wechatNoIsPublic" jdbcType="INTEGER" />
+    <result column="sinaweibo_no" property="sinaweiboNo" jdbcType="VARCHAR" />
+    <result column="sinaweibo_no_ispublic" property="sinaweiboNoIsPublic" jdbcType="INTEGER" />
+    <result column="apartment_no" property="apartmentNo" jdbcType="VARCHAR" />
+    <result column="room_no" property="roomNo" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <insert id="insert" parameterType="com.classaffairs.entity.Student" >
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      student_id,
+      student_no,
+      password,
+      name,
+      sex,
+      birthday,
+      birthplace,
+      home_address,
+      ethnic,
+      political_landscape,
+      id_card_no,
+      access_type,
+      undergraduate_college,
+      undergraduate_enddate,
+      grade_no,
+      school_no,
+      major_no,
+      cultivation_type,
+      executive_class_name,
+      department_no,
+      laboratory_no,
+      tutor_name,
+      research_direction,
+      degree_course_score,
+      degree_course_rank,
+      all_course_score,
+      all_course_rank,
+      cet4_score,
+      cet6_score,
+      state,
+      is_laboratory_leader,
+      is_department_leader,
+      is_monitor,
+      is_school_leader,
+      telephone_no_frequse,
+      telephone_no_frequse_ispublic,
+      telephone_no_backup,
+      telephone_no_backup_ispublic,
+      emai_no,
+      emai_no_ispublic,
+      qq_no,
+      qq_no_ispublic,
+      wechat_no,
+      wechat_no_ispublic,
+      sinaweibo_no,
+      sinaweibo_no_ispublic,
+      apartment_no,
+      room_no,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{studentId,jdbcType=BIGINT},
+      #{studentNo,jdbcType=VARCHAR},
+      #{password,jdbcType=VARCHAR},
+      #{name,jdbcType=VARCHAR},
+      #{sex,jdbcType=INTEGER},
+      #{birthday,jdbcType=TIMESTAMP},
+      #{birthplace,jdbcType=VARCHAR},
+       #{homeAddress,jdbcType=VARCHAR},
+      #{ethnic,jdbcType=VARCHAR},
+      #{politicalLandscape,jdbcType=VARCHAR},
+      #{IdCardNo,jdbcType=VARCHAR},
+      #{accessType,jdbcType=INTEGER},
+      #{undergraduateCollege,jdbcType=VARCHAR},
+      #{undergraduateEnddate,jdbcType=TIMESTAMP},
+      #{gradeNo,jdbcType=VARCHAR},
+      #{schoolNo,jdbcType=VARCHAR},
+      #{majorNo,jdbcType=VARCHAR},
+      #{cultivationType,jdbcType=INTEGER},
+      #{executiveClassName,jdbcType=VARCHAR},
+      #{departmentNo,jdbcType=VARCHAR},
+      #{laboratoryNo,jdbcType=VARCHAR},
+      #{tutorName,jdbcType=VARCHAR},
+      #{researchDirection,jdbcType=VARCHAR},
+      #{degreeCourseScore,jdbcType=FLOAT},
+      #{degreeCourseRank,jdbcType=INTEGER},
+      #{allCourseScore,jdbcType=FLOAT},
+      #{allCourseRank,jdbcType=INTEGER},
+      #{cet4Score,jdbcType=INTEGER},
+      #{cet6Score,jdbcType=INTEGER},
+      #{state,jdbcType=INTEGER},
+      #{isLaboratorLeader,jdbcType=INTEGER},
+      #{isDepartmentLeader,jdbcType=INTEGER},
+      #{isMonitor,jdbcType=INTEGER},
+      #{isSchoolLeader,jdbcType=INTEGER},
+      #{telephoneNoFrequse,jdbcType=VARCHAR},
+      #{telephoneNoFrequseIsPublic,jdbcType=INTEGER},
+      #{telephoneNoBackup,jdbcType=VARCHAR},
+      #{telephoneNoBackupIsPublic,jdbcType=INTEGER},
+      #{emaiNo,jdbcType=VARCHAR},
+      #{emaiNoIspublic,jdbcType=INTEGER},
+      #{qqNo,jdbcType=VARCHAR},
+      #{qqNoIsPublic,jdbcType=INTEGER},
+      #{wechatNo,jdbcType=VARCHAR},
+      #{wechatNoIsPublic,jdbcType=INTEGER},
+      #{sinaweiboNo,jdbcType=VARCHAR},
+      #{sinaweiboNoIsPublic,jdbcType=INTEGER},
+      #{apartmentNo,jdbcType=VARCHAR},
+      #{roomNo,jdbcType=VARCHAR},
+    </trim>
+  </insert>
+
+	<!-- 批量插入生成的兑换码 -->
+    <insert id ="insertByBatch" parameterType="java.util.List" >
+            <!-- <selectKey resultType ="java.lang.Integer" keyProperty= "id"
+                 order= "AFTER">
+                SELECT LAST_INSERT_ID()
+            </selectKey > -->
+		insert into student(
+				student_id,
+		      student_no,
+		      password,
+		      name,
+		      sex,
+		      birthday,
+		      birthplace,
+		      home_address,
+		      ethnic,
+		      political_landscape,
+		      id_card_no,
+		      access_type,
+		      undergraduate_college,
+		      undergraduate_enddate,
+		      grade_no,
+		      school_no,
+		      major_no,
+		      cultivation_type,
+		      executive_class_name,
+		      department_no,
+		      laboratory_no,
+		      tutor_name,
+		      research_direction,
+		      degree_course_score,
+		      degree_course_rank,
+		      all_course_score,
+		      all_course_rank,
+		      cet4_score,
+		      cet6_score,
+		      state,
+		      is_laboratory_leader,
+		      is_department_leader,
+		      is_monitor,
+		      is_school_leader,
+		      telephone_no_frequse,
+		      telephone_no_frequse_ispublic,
+		      telephone_no_backup,
+		      telephone_no_backup_ispublic,
+		      emai_no,
+		      emai_no_ispublic,
+		      qq_no,
+		      qq_no_ispublic,
+		      wechat_no,
+		      wechat_no_ispublic,
+		      sinaweibo_no,
+		      sinaweibo_no_ispublic,
+		      apartment_no,
+		      room_no
+		)
+           values
+            <foreach collection ="list" item="studentItem" index= "index" separator =",">
+                (
+                 #{studentItem.studentId,jdbcType=BIGINT},
+			      #{studentItem.studentNo,jdbcType=VARCHAR},
+			      #{studentItem.password,jdbcType=VARCHAR},
+			      #{studentItem.name,jdbcType=VARCHAR},
+			      #{studentItem.sex,jdbcType=INTEGER},
+			      #{studentItem.birthday,jdbcType=TIMESTAMP},
+			      #{studentItem.birthplace,jdbcType=VARCHAR},
+			      #{studentItem.homeAddress,jdbcType=VARCHAR},
+			      #{studentItem.ethnic,jdbcType=VARCHAR},
+			      #{studentItem.politicalLandscape,jdbcType=VARCHAR},
+			      #{studentItem.IdCardNo,jdbcType=VARCHAR},
+			      #{studentItem.accessType,jdbcType=INTEGER},
+			      #{studentItem.undergraduateCollege,jdbcType=VARCHAR},
+			      #{studentItem.undergraduateEnddate,jdbcType=TIMESTAMP},
+			      #{studentItem.gradeNo,jdbcType=VARCHAR},
+			      #{studentItem.schoolNo,jdbcType=VARCHAR},
+			      #{studentItem.majorNo,jdbcType=VARCHAR},
+			      #{studentItem.cultivationType,jdbcType=INTEGER},
+			      #{studentItem.executiveClassName,jdbcType=VARCHAR},
+			      #{studentItem.departmentNo,jdbcType=VARCHAR},
+			      #{studentItem.laboratoryNo,jdbcType=VARCHAR},
+			      #{studentItem.tutorName,jdbcType=VARCHAR},
+			      #{studentItem.researchDirection,jdbcType=VARCHAR},
+			      #{studentItem.degreeCourseScore,jdbcType=FLOAT},
+			      #{studentItem.degreeCourseRank,jdbcType=INTEGER},
+			      #{studentItem.allCourseScore,jdbcType=FLOAT},
+			      #{studentItem.allCourseRank,jdbcType=INTEGER},
+			      #{studentItem.cet4Score,jdbcType=INTEGER},
+			      #{studentItem.cet6Score,jdbcType=INTEGER},
+			      #{studentItem.state,jdbcType=INTEGER},
+			      #{studentItem.isLaboratorLeader,jdbcType=INTEGER},
+			      #{studentItem.isDepartmentLeader,jdbcType=INTEGER},
+			      #{studentItem.isMonitor,jdbcType=INTEGER},
+			      #{studentItem.isSchoolLeader,jdbcType=INTEGER},
+			      #{studentItem.telephoneNoFrequse,jdbcType=VARCHAR},
+			      #{studentItem.telephoneNoFrequseIsPublic,jdbcType=INTEGER},
+			      #{studentItem.telephoneNoBackup,jdbcType=VARCHAR},
+			      #{studentItem.telephoneNoBackupIsPublic,jdbcType=INTEGER},
+			      #{studentItem.emaiNo,jdbcType=VARCHAR},
+			      #{studentItem.emaiNoIspublic,jdbcType=INTEGER},
+			      #{studentItem.qqNo,jdbcType=VARCHAR},
+			      #{studentItem.qqNoIsPublic,jdbcType=INTEGER},
+			      #{studentItem.wechatNo,jdbcType=VARCHAR},
+			      #{studentItem.wechatNoIsPublic,jdbcType=INTEGER},
+			      #{studentItem.sinaweiboNo,jdbcType=VARCHAR},
+			      #{studentItem.sinaweiboNoIsPublic,jdbcType=INTEGER},
+			       #{studentItem.apartmentNo,jdbcType=VARCHAR},
+			        #{studentItem.roomNo,jdbcType=VARCHAR}
+                )
+            </foreach >
+     </insert >
+
+  <update id="update" parameterType="com.classaffairs.entity.Student" >
+    update `student`
+    <set >
+      <if test="studentNo != null" >
+        `student_no` = #{studentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="birthplace != null" >
+        birthplace = #{birthplace,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddress != null" >
+        home_address = #{homeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="ethnic != null" >
+        ethnic = #{ethnic,jdbcType=VARCHAR},
+      </if>
+      <if test="politicalLandscape != null" >
+        political_landscape = #{politicalLandscape,jdbcType=VARCHAR},
+      </if>
+      <if test="IdCardNo != null" >
+        id_card_no = #{IdCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="accessType != null" >
+        access_type = #{accessType,jdbcType=INTEGER},
+      </if>
+      <if test="undergraduateCollege != null" >
+        undergraduate_college = #{undergraduateCollege,jdbcType=VARCHAR},
+      </if>
+      <if test="undergraduateEnddate != null" >
+        undergraduate_enddate = #{undergraduateEnddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gradeNo != null" >
+        grade_no = #{gradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolNo != null" >
+        school_no = #{schoolNo,jdbcType=VARCHAR},
+      </if>
+      <if test="majorNo != null" >
+        major_no = #{majorNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cultivationType != null" >
+        cultivation_type = #{cultivationType,jdbcType=INTEGER},
+      </if>
+      <if test="executiveClassName != null" >
+        executive_class_name = #{executiveClassName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentNo != null" >
+        department_no = #{departmentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="laboratoryNo != null" >
+        laboratory_no = #{laboratoryNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tutorName != null" >
+        tutor_name = #{tutorName,jdbcType=VARCHAR},
+      </if>
+      <if test="researchDirection != null" >
+        research_direction = #{researchDirection,jdbcType=VARCHAR},
+      </if>
+      <if test="degreeCourseScore != null" >
+        degree_course_score =  #{degreeCourseScore,jdbcType=FLOAT},
+      </if>
+      <if test="degreeCourseRank != null" >
+        degree_course_rank = #{degreeCourseRank,jdbcType=INTEGER},
+      </if>
+      <if test="allCourseScore != null" >
+        all_course_score = #{allCourseScore,jdbcType=FLOAT},
+      </if>
+      <if test="allCourseRank != null" >
+        all_course_rank = #{allCourseRank,jdbcType=INTEGER},
+      </if>
+      <if test="cet4Score != null" >
+        cet4_score =  #{cet4Score,jdbcType=INTEGER},
+      </if>
+      <if test="cet6Score != null" >
+        cet6_score =  #{cet6Score,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="isLaboratorLeader != null" >
+        is_laboratory_leader = #{isLaboratorLeader,jdbcType=INTEGER},
+      </if>
+      <if test="isDepartmentLeader != null" >
+        is_department_leader = #{isDepartmentLeader,jdbcType=INTEGER},
+      </if>
+      <if test="isMonitor != null" >
+        is_monitor = #{isMonitor,jdbcType=INTEGER},
+      </if>
+      <if test="isSchoolLeader != null" >
+        is_school_leader = #{isSchoolLeader,jdbcType=INTEGER},
+      </if>
+      <if test="telephoneNoFrequse != null" >
+        telephone_no_frequse = #{telephoneNoFrequse,jdbcType=VARCHAR},
+      </if>
+      <if test="telephoneNoFrequseIsPublic != null" >
+        telephone_no_frequse_ispublic = #{telephoneNoFrequseIsPublic,jdbcType=INTEGER},
+      </if>
+      <if test="telephoneNoBackup != null" >
+        telephone_no_backup = #{telephoneNoBackup,jdbcType=VARCHAR},
+      </if>
+      <if test="telephoneNoBackupIsPublic != null" >
+        telephone_no_backup_ispublic = #{telephoneNoBackupIsPublic,jdbcType=INTEGER},
+      </if>
+      <if test="emaiNo != null" >
+        emai_no = #{emaiNo,jdbcType=VARCHAR},
+      </if>
+      <if test="emaiNoIspublic != null" >
+        emai_no_ispublic = #{emaiNoIspublic,jdbcType=INTEGER},
+      </if>
+      <if test="qqNo != null" >
+        qq_no = #{qqNo,jdbcType=VARCHAR},
+      </if>
+      <if test="qqNoIsPublic != null" >
+        qq_no_ispublic = #{qqNoIsPublic,jdbcType=INTEGER},
+      </if>
+      <if test="wechatNo != null" >
+        wechat_no = #{wechatNo,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatNoIsPublic != null" >
+        wechat_no_ispublic = #{wechatNoIsPublic,jdbcType=INTEGER},
+      </if>
+      <if test="sinaweiboNo != null" >
+        sinaweibo_no = #{sinaweiboNo,jdbcType=VARCHAR},
+      </if>
+       <if test="sinaweiboNoIsPublic != null" >
+        sinaweibo_no_ispublic = #{sinaweiboNoIsPublic,jdbcType=INTEGER},
+      </if>
+      <if test="apartmentNo != null" >
+        apartment_no = #{apartmentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="roomNo != null" >
+        room_no = #{roomNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where student_id = #{studentId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByBatch" parameterType="java.util.List" >
+    update `student`
+    <trim prefix="set" suffixOverrides=",">
+    	<trim prefix="student_no = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.studentNo != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.studentNo}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="password = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.password != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.password}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="name = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.name != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.name}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="sex = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.sex != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.sex}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="birthday = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.birthday != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.birthday}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="birthplace = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.birthplace != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.birthplace}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="home_address = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.homeAddress != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.homeAddress}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="ethnic = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.ethnic != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.ethnic}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="political_landscape = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.politicalLandscape != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.politicalLandscape}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="id_card_no = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.IdCardNo != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.IdCardNo}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="access_type = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.accessType != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.accessType}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="undergraduate_college = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.undergraduateCollege != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.undergraduateCollege}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="undergraduate_enddate = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.undergraduateEnddate != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.undergraduateEnddate}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="grade_no = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.gradeNo != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.gradeNo}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="school_no = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.schoolNo != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.schoolNo}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="major_no = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.majorNo != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.majorNo}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="cultivation_type = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.cultivationType != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.cultivationType}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="executive_class_name = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.executiveClassName != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.executiveClassName}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="department_no = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.departmentNo != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.departmentNo}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="laboratory_no = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.laboratoryNo != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.laboratoryNo}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="tutor_name = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.tutorName != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.tutorName}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="research_direction = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.researchDirection != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.researchDirection}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="degree_course_score = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.degreeCourseScore != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.degreeCourseScore}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="degree_course_rank = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.degreeCourseRank != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.degreeCourseRank}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="all_course_score = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.allCourseScore != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.allCourseScore}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="all_course_rank = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.allCourseRank != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.allCourseRank}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="cet4_score = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.cet4Score != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.cet4Score}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="cet6_score = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.cet6Score != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.cet6Score}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="state = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.state != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.state}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="is_laboratory_leader = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.isLaboratorLeader != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.isLaboratorLeader}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="is_department_leader = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.isDepartmentLeader != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.isDepartmentLeader}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="is_monitor = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.isMonitor != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.isMonitor}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="is_school_leader = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.isSchoolLeader != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.isSchoolLeader}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="telephone_no_frequse = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.telephoneNoFrequse != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.telephoneNoFrequse}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="telephone_no_frequse_ispublic = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.telephoneNoFrequseIsPublic != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.telephoneNoFrequseIsPublic}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="telephone_no_backup = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.telephoneNoBackup != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.telephoneNoBackup}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="telephone_no_backup_ispublic = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.telephoneNoBackupIsPublic != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.telephoneNoBackupIsPublic}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="emai_no = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.emaiNo != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.emaiNo}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="emai_no_ispublic = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.emaiNoIspublic != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.emaiNoIspublic}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="qq_no = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.qqNo != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.qqNo}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="qq_no_ispublic = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.qqNoIsPublic != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.qqNoIsPublic}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="wechat_no = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.wechatNo != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.wechatNo}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="wechat_no_ispublic = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.wechatNoIsPublic != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.wechatNoIsPublic}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="sinaweibo_no = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.sinaweiboNo != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.sinaweiboNo}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="sinaweibo_no_ispublic = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.sinaweiboNoIsPublic != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.sinaweiboNoIsPublic}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="apartment_no = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.apartmentNo != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.apartmentNo}
+    			</if>
+    		</foreach>
+    	</trim>
+    	<trim prefix="room_no = case" suffix="end,">
+    		<foreach collection="list" item="studentItem" index="index">
+    			<if test="studentItem.roomNo != null">
+    				when student_id = #{studentItem.studentId} then #{studentItem.roomNo}
+    			</if>
+    		</foreach>
+    	</trim>
+    </trim>
+    where
+    <foreach collection="list" separator="or" item="studentItem" index="index">
+    	student_id = #{studentItem.studentId}
+    </foreach>
+  </update>
+  <delete id="delete" parameterType="Long">
+    delete from student where student_id = #{studentId}
+  </delete>
+  <select id="findById" parameterType="Long" resultMap="StudentResultMap">
+    select * from student where student_id = #{studentId} order by student_no asc
+  </select>
+  <select id="findStudentByStudentNo" parameterType="String" resultMap="StudentResultMap">
+    select * from student where student_no = #{studentNo}
+  </select>
+  <select id="getStudentByState" parameterType="INTEGER" resultMap="StudentResultMap">
+    select * from student where state = #{state} order by student_no asc
+  </select>
+   <select id="findAll"  resultMap="StudentResultMap">
+    select * from student where 1 = 1 order by student_no asc
+  </select>
+<!--    <select id="findStudentByFuzzyInformation"  resultMap="StudentResultMap">
+   	select * from student where 1 = 1
+   	<if test="studentNo != null &amp;&amp; studentNo != '' " >
+        and `student_no` like #{studentNo,jdbcType=VARCHAR}
+    </if>
+    <if test="studentName != null &amp;&amp; studentName != '' " >
+        and `name` like #{studentName,jdbcType=VARCHAR}
+    </if>
+    <if test="gradeNo != null &amp;&amp; gradeNo != '' " >
+        and `grade_no` = #{gradeNo,jdbcType=VARCHAR}
+    </if>
+     <if test="schoolNo != null &amp;&amp; schoolNo != '' " >
+        and `school_no` = #{schoolNo,jdbcType=VARCHAR}
+    </if>
+     <if test="majorNo != null &amp;&amp; majorNo != '' " >
+        and `major_no` = #{majorNo,jdbcType=VARCHAR}
+    </if>
+    <choose>
+    	<when test="searchSource == 'admin'.toString()">
+    		<if test="executiveClassNo != null &amp;&amp; executiveClassNo != '' " >
+        		and `executive_class_name` = #{executiveClassNo,jdbcType=VARCHAR}
+    		</if>
+    	</when>
+    	<otherwise>学生列表查询
+    		and `executive_class_name` in (select name from executiveclass where executive_class_group = (select executive_class_group from executiveclass where name = #{executiveClassNo,jdbcType=VARCHAR}))
+    	</otherwise>
+    </choose>
+  </select> -->
+     <select id="findStudentByFuzzyInformationFromAdmin"  resultMap="StudentResultMap">
+	   	select * from student where 1 = 1
+	   	<if test="studentNo != null &amp;&amp; studentNo != '' " >
+	        and `student_no` like #{studentNo,jdbcType=VARCHAR}
+	    </if>
+	    <if test="studentName != null &amp;&amp; studentName != '' " >
+	        and `name` like #{studentName,jdbcType=VARCHAR}
+	    </if>
+	    <if test="gradeNo != null &amp;&amp; gradeNo != '' " >
+	        and `grade_no` = #{gradeNo,jdbcType=VARCHAR}
+	    </if>
+	     <if test="schoolNo != null &amp;&amp; schoolNo != '' " >
+	        and `school_no` = #{schoolNo,jdbcType=VARCHAR}
+	    </if>
+	     <if test="majorNo != null &amp;&amp; majorNo != '' " >
+	        and `major_no` = #{majorNo,jdbcType=VARCHAR}
+	    </if>
+	    <if test="executiveClassNo != null &amp;&amp; executiveClassNo != '' " >
+	        and `executive_class_name` = #{executiveClassNo,jdbcType=VARCHAR}
+	    </if>
+	     order by student_no asc
+  </select>
+     <select id="findStudentByFuzzyInformationFromStudent"  resultMap="StudentResultMap">
+	   	select * from student where state = 1
+	   	<if test="studentNo != null &amp;&amp; studentNo != '' " >
+	        and `student_no` like #{studentNo,jdbcType=VARCHAR}
+	    </if>
+	    <if test="studentName != null &amp;&amp; studentName != '' " >
+	        and `name` like #{studentName,jdbcType=VARCHAR}
+	    </if>
+	    <if test="sex != null &amp;&amp; sex != '' " >
+	        and `sex` = #{sex,jdbcType=VARCHAR}
+	    </if>
+	     <if test="birthplace != null &amp;&amp; birthplace != '' " >
+	        and `birthplace` like #{birthplace,jdbcType=VARCHAR}
+	    </if>
+	     <if test="politicalLandscape != null &amp;&amp; politicalLandscape != '' " >
+	        and `political_landscape` = #{politicalLandscape,jdbcType=VARCHAR}
+	    </if>
+	     <if test="accessType != null &amp;&amp; accessType != '' " >
+	        and `access_type` = #{accessType,jdbcType=VARCHAR}
+	    </if>
+	    <if test="majorNo != null &amp;&amp; majorNo != '' " >
+	        and `major_no` = #{majorNo,jdbcType=VARCHAR}
+	    </if>
+	    <if test="cultivationType != null &amp;&amp; cultivationType != '' " >
+	        and `cultivation_type` = #{cultivationType,jdbcType=VARCHAR}
+	    </if>
+	    and `executive_class_name` in (select name from executiveclass where executive_class_group = (select executive_class_group from executiveclass where name = #{executiveClassNo,jdbcType=VARCHAR})) order by student_no asc
+  </select>
+  
+  <!-- 批量插入生成的兑换码 -->
+    <select id ="findStudentListByExecutiveClassNames" parameterType="java.util.List" resultMap="StudentResultMap">
+           select * from student where `executive_class_name` in
+            <!-- <foreach collection ="list" item="executiveClassNameItem" index= "index" separator =",">
+                #{executiveClassNameItem}
+            </foreach > -->
+	        <foreach collection="list" item="executiveClassNameItem" index="index"
+	            open="(" close=")" separator=",">
+	            #{executiveClassNameItem}
+	        </foreach>
+	         order by student_no asc
+     </select >
+     
+</mapper>

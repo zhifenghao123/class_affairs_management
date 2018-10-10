@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.classaffairs.entity.SocialContact" >
+	<resultMap id="SocialContactResultMap" type="com.classaffairs.entity.SocialContact" >
+	    <id column="socialContactId" property="socialContactId" jdbcType="BIGINT" />
+	    <result column="studentId" property="studentId" jdbcType="BIGINT" />
+	    <result column="telephoneNoFreqUse" property="telephoneNoFreqUse" jdbcType="VARCHAR" />
+	    <result column="telephoneNoFreqUseIsPublic" property="telephoneNoFreqUseIsPublic" jdbcType="INTEGER" />
+	    <result column="telephoneNoBackup" property="telephoneNoBackup" jdbcType="VARCHAR" />
+	    <result column="telephoneNoBackupIsPublic" property="telephoneNoBackupIsPublic" jdbcType="INTEGER" />
+	    <result column="emailFreqUse" property="emailFreqUse" jdbcType="VARCHAR" />
+   		<result column="emailFreqUseIsPublic" property="emailFreqUseIsPublic" jdbcType="INTEGER" />
+   		<result column="emailBackup" property="emailBackup" jdbcType="VARCHAR" />
+   		<result column="emailBackupIsPublic" property="emailBackupIsPublic" jdbcType="INTEGER" />
+   		<result column="qqNo" property="qqNo" jdbcType="VARCHAR" />
+   		<result column="qqNoIsPublic" property="qqNoIsPublic" jdbcType="INTEGER" />
+   		<result column="weChatNo" property="weChatNo" jdbcType="VARCHAR" />
+   		<result column="weChatNoIsPublic" property="weChatNoIsPublic" jdbcType="INTEGER" />
+   		<result column="sinaWeiboNo" property="sinaWeiboNo" jdbcType="VARCHAR" />
+   		<result column="sinaWeiboNoIsPublic" property="sinaWeiboNoIsPublic" jdbcType="INTEGER" />
+   		<result column="aliPayNo" property="aliPayNo" jdbcType="VARCHAR" />
+   		<result column="aliPayNoIsPublic" property="aliPayNoIsPublic" jdbcType="INTEGER" />
+   		<result column="cnblogNo" property="cnblogNo" jdbcType="VARCHAR" />
+   		<result column="cnblogNoIsPublic" property="cnblogNoIsPublic" jdbcType="INTEGER" />
+  	</resultMap>
+  	<insert id="insert" parameterType="com.classaffairs.entity.SocialContact" >
+    insert into socialContact
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      socialContactId,
+      studentId,
+      telephoneNoFreqUse,
+      telephoneNoFreqUseIsPublic,
+      telephoneNoBackup,
+      telephoneNoBackupIsPublic,
+      emailFreqUse,
+      emailFreqUseIsPublic,
+      emailBackup,
+      emailBackupIsPublic,
+      qqNo,
+      qqNoIsPublic,
+      weChatNo,
+      weChatNoIsPublic,
+      sinaWeiboNo,
+      sinaWeiboNoIsPublic,
+      aliPayNo,
+      aliPayNoIsPublic,
+      cnblogNo,
+      cnblogNoIsPublic,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{socialContactId,jdbcType=BIGINT},
+      #{studentId,jdbcType=BIGINT},
+      #{telephoneNoFreqUse,jdbcType=VARCHAR},
+      #{telephoneNoFreqUseIsPublic,jdbcType=INTEGER},
+      #{telephoneNoBackup,jdbcType=VARCHAR},
+      #{telephoneNoBackupIsPublic,jdbcType=INTEGER},
+      #{emailFreqUse,jdbcType=VARCHAR},
+      #{emailFreqUseIsPublic,jdbcType=INTEGER},
+      #{emailBackup,jdbcType=VARCHAR},
+      #{emailBackupIsPublic,jdbcType=INTEGER},
+      #{qqNo,jdbcType=VARCHAR},
+      #{qqNoIsPublic,jdbcType=INTEGER},
+      #{weChatNo,jdbcType=VARCHAR},
+      #{weChatNoIsPublic,jdbcType=INTEGER},
+      #{sinaWeiboNo,jdbcType=VARCHAR},
+      #{sinaWeiboNoIsPublic,jdbcType=INTEGER},
+      #{aliPayNo,jdbcType=VARCHAR},
+      #{aliPayNoIsPublic,jdbcType=INTEGER},
+      #{cnblogNo,jdbcType=VARCHAR},
+      #{cnblogNoIsPublic,jdbcType=INTEGER},
+
+    </trim>
+  </insert>
+  	<select id="getById" resultMap="SocialContactResultMap" parameterType="Long">
+    	select * from socialContact where socialContactId =#{socialContactId}
+  	</select>
+  	<select id="findSocialContactBySocialContactNo" resultMap="SocialContactResultMap" parameterType="String">
+    	select * from socialContact where socialContactNo =#{socialContactNo}
+  	</select>
+</mapper>

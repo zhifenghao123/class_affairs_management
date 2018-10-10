@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.classaffairs.entity.NoticeReadRecord" >
+  <resultMap id="BaseResultMap" type="com.classaffairs.entity.NoticeReadRecord" >
+    <id column="notice_read_id" property="noticeReadId" jdbcType="BIGINT" />
+    <result column="notice_id" property="noticeId" jdbcType="BIGINT" />
+    <result column="user_no" property="userNo" jdbcType="VARCHAR" />
+    <result column="read_time" property="readTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    notice_read_id, notice_id, user_no, read_time
+  </sql>
+  <insert id="insert" parameterType="com.classaffairs.entity.NoticeReadRecord" >
+    insert into notice_read_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+	    notice_read_id, 
+	    notice_id, 
+	    user_no, 
+	    read_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{noticeReadId,jdbcType=BIGINT},
+      #{noticeId,jdbcType=BIGINT},
+      #{userNo,jdbcType=VARCHAR},
+      #{readTime,jdbcType=TIMESTAMP},
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.classaffairs.entity.NoticeReadRecord" >
+    update notice_read_record
+    <set >
+      <if test="noticeId != null" >
+        notice_id = #{noticeId,jdbcType=BIGINT},
+      </if>
+      <if test="userNo != null" >
+        user_no = #{userNo,jdbcType=VARCHAR},
+      </if>
+      <if test="readTime != null" >
+        read_time = #{readTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where notice_read_id = #{noticeReadId,jdbcType=BIGINT}
+  </update>
+  <delete id="delete" parameterType="Long">
+		delete from notice_read_record where
+		notice_read_id=#{noticeReadId}
+   </delete>
+	<select id="getById" parameterType="Long" resultMap="BaseResultMap">
+		select * from notice_read_record where notice_read_id=#{noticeReadId}
+	</select>
+  	<select id="getAllNoticeReadRecord" resultMap="BaseResultMap">
+		select * from notice_read_record
+	</select>
+
+</mapper>

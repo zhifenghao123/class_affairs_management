@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.classaffairs.entity.BaseType" >
+  <resultMap id="BaseTypeResultMap" type="com.classaffairs.entity.BaseType" >
+    <id column="base_type_id" property="baseTypeId" jdbcType="BIGINT" />
+    <result column="type_name" property="typeName" jdbcType="VARCHAR" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insertSelective" parameterType="com.classaffairs.entity.BaseType" >
+    insert into base_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      base_type_id,
+      type_name,
+      memo,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{baseTypeId,jdbcType=BIGINT},
+      #{typeName,jdbcType=VARCHAR},
+      #{memo,jdbcType=VARCHAR},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.classaffairs.entity.BaseType" >
+    update base_type
+    <set >
+      <if test="typeName != null" >
+        type_name = #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where base_type_id = #{baseTypeId,jdbcType=BIGINT}
+  </update>
+  <select id="findById" parameterType="Long" resultMap="BaseTypeResultMap">
+      select * from base_type where base_type_id = #{baseTypeId,jdbcType=BIGINT}
+  </select>
+    <select id="findAllBaseType" resultType="java.util.HashMap">
+      select base_type_id from base_type
+  </select>
+</mapper>

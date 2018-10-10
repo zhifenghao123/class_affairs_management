@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   
+    xmlns:p="http://www.springframework.org/schema/p"   
+    xmlns:mongo="http://www.springframework.org/schema/data/mongo"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans   
+            http://www.springframework.org/schema/beans/spring-beans-3.2.xsd  
+            http://www.springframework.org/schema/data/mongo  
+            http://www.springframework.org/schema/data/mongo/spring-mongo.xsd
+            http://www.springframework.org/schema/data/repository
+            http://www.springframework.org/schema/data/repository/spring-repository-1.5.xsd">        
+
+	<!-- 方式1 -->
+	<!-- <mongo:mongo host="${mongodb.host}" port="${mongodb.port}"/>
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg ref="mongo"/>
+		<constructor-arg name="databaseName" value="${mongodb.dbname}"/>
+	</bean> -->
+	
+	<!-- 方式2 -->
+	<!-- <mongo:db-factory id="mongoDbFactory" 
+					host="${mongodb.host}" 
+					port="${mongodb.port}" 
+					dbname="${mongodb.dbname}" 
+					username="${mongodb.username}" 
+					password="${mongodb.password}"/>
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
+	</bean> -->
+
+	<!-- 方式3 集群部署 -->
+	<mongo:mongo id="mongo" replica-set="${mongodb.replica-set}" port="${mongodb.port}" >
+	<!-- connections-per-host 每个主机答应的连接数（每个主机的连接池大小），当连接池被用光时，会被阻塞住 ，默以为10 int
+		connect-timeout 连接超时时间（ms），默以为0（无穷） int
+		max-wait-time 连接的最长等待时间（ms） int
+		socket-keep-alive 默认为false
+		socket-timeout Socket超时时间 默以为0（无穷） int
+		threads-allowed-to-block-for-connection-multiplier 线程队列数，它以上面connectionsPerHost值相乘的结果就是线程队列最大值。如果连接线程排满了队列就会抛出“Out of semaphores to get db”错误
+	 -->
+	<mongo:options 
+		connections-per-host="${mongodb.connections-per-host}" 
+		connect-timeout="${mongodb.connect-timeout}" 
+		max-wait-time="${mongodb.max-wait-time}" 
+		socket-keep-alive="${mongodb.socket-keep-alive}" 
+		socket-timeout="${mongodb.socket-timeout}" 
+		threads-allowed-to-block-for-connection-multiplier="${mongodb.threads-allowed-to-block-for-connection-multiplier}"/>
+	</mongo:mongo>
+	
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg ref="mongo"/>
+		<constructor-arg name="databaseName" value="${mongodb.dbname}"/>
+		<!-- 数据库需要认证用户名和密码请使用下面代码 -->
+<!-- 		<constructor-arg name="userCredentials" ref="userCredentials"/> -->
+	</bean>
+	<!-- 数据库用户名和密码认证 -->
+<!-- 	<bean id="userCredentials" class="org.springframework.data.authentication.UserCredentials">
+		<constructor-arg name="username" value="${mongodb.username}"/>
+		<constructor-arg name="password" value="${mongodb.password}"/>
+	</bean> -->
+</beans>

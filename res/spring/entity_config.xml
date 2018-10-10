@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 此配置文件用于操作日志中参数实体及关注字段的记录 -->
+<!-- entity name记录了实体的绝对路径，property记录了实体的主键和所关注的字段值，日志中通过主键查询关注字段 -->
+<entitys>
+	<entity name="com.classaffairs.entity.Application">
+		<property name="applicationId"></property>
+		<property name="displayName"></property>
+	</entity>
+	
+	<entity name="com.classaffairs.entity.Authority">
+		<property name="authorityId"></property>
+		<property name="name"></property>
+	</entity>
+	
+	<entity name="com.classaffairs.entity.Role">
+		<property name="roleId"></property>
+		<property name="name"></property>
+	</entity>
+	
+	<entity name="com.classaffairs.entity.Administrator">
+		<property name="administratorId"></property>
+		<property name="name"></property>
+	</entity>
+	
+	<entity name="com.classaffairs.entity.Student">
+		<property name="studentId"></property>
+		<property name="name"></property>
+	</entity>
+	
+	<entity name="com.classaffairs.entity.School">
+		<property name="schoolId"></property>
+		<property name="name"></property>
+	</entity>
+	
+	<entity name="com.classaffairs.entity.Department">
+		<property name="departmentId"></property>
+		<property name="name"></property>
+	</entity>
+	
+	<entity name="com.classaffairs.entity.Major">
+		<property name="majorlId"></property>
+		<property name="name"></property>
+	</entity>
+	
+	<entity name="com.classaffairs.entity.Grade">
+		<property name="gradeNo"></property>
+		<property name="enrollDate"></property>
+	</entity>
+	
+	<entity name="com.classaffairs.entity.ExecutiveClass">
+		<property name="executiveClassId"></property>
+		<property name="name"></property>
+	</entity>
+	
+	<entity name="com.classaffairs.entity.Laboratory">
+		<property name="laboratoryId"></property>
+		<property name="address"></property>
+	</entity>
+	
+	<entity name="com.classaffairs.entity.Apartment">
+		<property name="apartmentId"></property>
+		<property name="apartmentNo"></property>
+	</entity>
+	
+	<entity name="com.classaffairs.entity.Dormitory">
+        <property name="dormitoryId"></property>
+        <property name="roomNo"></property>
+    </entity>
+    
+	<entity name="com.classaffairs.entity.Notice">
+		<property name="noticeId"></property>
+		<property name="title"></property>
+	</entity>
+	
+	<entity name="com.classaffairs.entity.Activity">
+		<property name="activityId"></property>
+		<property name="name"></property>
+	</entity>
+	
+	<entity name="com.classaffairs.entity.Blog">
+		<property name="blogId"></property>
+		<property name="title"></property>
+	</entity>
+	
+</entitys>

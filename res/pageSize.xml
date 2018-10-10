@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 设置页面大小！！！ -->
+<pageSize>
+	<!-- 前台列表页面大小！！！ -->
+	<PAGESIZELIST>10</PAGESIZELIST>
+</pageSize>

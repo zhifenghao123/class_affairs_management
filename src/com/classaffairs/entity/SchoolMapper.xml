@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.classaffairs.entity.School" >
+  <resultMap id="SchoolResultMap" type="com.classaffairs.entity.School" >
+    <id column="school_id" property="schoolId" jdbcType="BIGINT" />
+    <result column="school_no" property="schoolNo" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="abbreviation" property="abbreviation" jdbcType="VARCHAR" />
+     <result column="executive_class_cadre_mode" property="executiveClassCadreMode" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="com.classaffairs.entity.School" >
+    insert into school
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      school_id,
+      school_no,
+      name,
+      abbreviation,
+      executive_class_cadre_mode,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{schoolId,jdbcType=BIGINT},
+      #{schoolNo,jdbcType=VARCHAR},
+      #{name,jdbcType=VARCHAR},
+      #{abbreviation,jdbcType=VARCHAR},
+      #{executiveClassCadreMode,jdbcType=INTEGER},
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.classaffairs.entity.School" >
+    update `school`
+    <set >
+      <if test="schoolNo != null" >
+        `school_no` = #{schoolNo,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="abbreviation != null" >
+        abbreviation = #{abbreviation,jdbcType=VARCHAR},
+      </if>
+      <if test="executiveClassCadreMode != null" >
+        executive_class_cadre_mode = #{executiveClassCadreMode,jdbcType=INTEGER},
+      </if>
+    </set>
+    where school_id = #{schoolId,jdbcType=BIGINT}
+  </update>
+  <delete id="delete" parameterType="Long">
+    delete from school where school_id = #{schoolId}
+  </delete>
+  <select id="findById" parameterType="Long" resultMap="SchoolResultMap">
+    select * from school where school_id = #{schoolId}
+  </select>
+  <select id="findSchoolBySchoolNo" parameterType="String" resultMap="SchoolResultMap">
+    select * from school where school_no = #{schoolNo}
+  </select>
+  <select id="getSchoolByState" parameterType="INTEGER" resultMap="SchoolResultMap">
+    select * from school where state = #{state}
+  </select>
+   <select id="findAll"  resultMap="SchoolResultMap">
+    select * from school where 1 = 1
+  </select>
+   <select id="findSchoolByFuzzyInformation"  resultMap="SchoolResultMap">
+   	select * from school where 1 = 1
+   	<if test="schoolNo != null" >
+        `school_no` like #{schoolNo,jdbcType=VARCHAR},
+    </if>
+    <if test="name != null" >
+        `name` like #{name,jdbcType=VARCHAR},
+    </if>
+  </select>
+</mapper>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.classaffairs.entity.Grade" >
+  <resultMap id="GradeResultMap" type="com.classaffairs.entity.Grade" >
+    <id column="grade_no" property="gradeNo" jdbcType="VARCHAR" />
+    <result column="enroll_date" property="enrollDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <insert id="insert" parameterType="com.classaffairs.entity.Grade" >
+    insert into grade
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      grade_no,
+      enroll_date,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{gradeNo,jdbcType=VARCHAR},
+      #{enrollDate,jdbcType=TIMESTAMP},
+    </trim>
+  </insert>
+
+  <update id="update" parameterType="com.classaffairs.entity.Grade" >
+    update `grade`
+    <set >
+      <if test="enrollDate != null" >
+        enroll_date = #{enrollDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where grade_no = #{gradeNo,jdbcType=VARCHAR}
+  </update>
+  <delete id="delete" parameterType="Long">
+    delete from grade where grade_no = #{gradeNo,jdbcType=VARCHAR}
+  </delete>
+  <select id="findById" parameterType="Long" resultMap="GradeResultMap">
+    select * from grade where grade_no = #{gradeNo,jdbcType=VARCHAR}
+  </select>
+  <select id="findAll" resultMap="GradeResultMap">
+    select * from grade where 1 = 1
+  </select>
+  <select id="findGradeByFuzzyInformation"  resultMap="GradeResultMap">
+   	select * from grade where 1 = 1
+   	<if test="gradeNo != null" >
+        `grade_no` like #{gradeNo,jdbcType=VARCHAR},
+    </if>
+  </select>
+    <select id="findGradeByGradeNo" parameterType="String" resultMap="GradeResultMap">
+    select * from grade where grade_no = #{gradeNo,jdbcType=VARCHAR}
+  </select>
+</mapper>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.classaffairs.entity.BaseInfo" >
+  <resultMap id="BaseInfoResultMap" type="com.classaffairs.entity.BaseInfo" >
+    <id column="base_info_id" property="baseInfoId" jdbcType="BIGINT" />
+    <result column="base_type_id" property="baseTypeId" jdbcType="BIGINT" />
+    <result column="code" property="code" jdbcType="INTEGER" />
+    <result column="display" property="display" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectBaseInfoByType" resultMap="BaseInfoResultMap"  parameterType="Long">
+    select <include refid="Base_Column_List" /> from base_info where base_type_id =#{base_type_id}
+  </select>
+  <select id="getBaseInfoByTypeAndCode" parameterType="java.util.HashMap" resultMap="BaseInfoResultMap">
+   select <include refid="Base_Column_List" /> from base_info where base_type_id =#{type} and code = #{code}
+  </select>
+  <sql id="Base_Column_List" >
+    base_info_id, base_type_id, code, display
+  </sql>
+  <insert id="insert" parameterType="com.classaffairs.entity.BaseInfo" >
+    insert into base_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      base_info_id,
+      base_type_id,
+      code,
+      display,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{baseInfoId,jdbcType=BIGINT},
+      #{baseTypeId,jdbcType=BIGINT},
+      #{code,jdbcType=INTEGER},
+      #{display,jdbcType=VARCHAR},
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.classaffairs.entity.BaseInfo" >
+    update base_info
+    <set >
+      <if test="baseTypeId != null" >
+        base_type_id = #{baseTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=INTEGER},
+      </if>
+      <if test="display != null" >
+        display = #{display,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where base_info_id = #{baseInfoId,jdbcType=BIGINT}
+  </update>
+   <select id="findById" parameterType="Long" resultMap="BaseInfoResultMap">
+      select * from base_info where base_info_id = #{baseInfoId,jdbcType=BIGINT}
+  </select>
+    <select id="findAll" resultMap="BaseInfoResultMap">
+    select * from base_info
+    </select>
+    <delete id="delete" parameterType="Long" >
+    delete from base_info where base_info_id = #{baseInfoId}
+  </delete>
+  <select id="findBaseInfo" parameterType="java.util.HashMap" resultMap="BaseInfoResultMap">
+    select * from base_info
+    </select>
+</mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.classaffairs.entity.PrimaryKey" >
+  <resultMap id="PrimaryKeyResultMap" type="com.classaffairs.entity.PrimaryKey" >
+    <id column="primary_key_id" property="primaryKeyId" jdbcType="INTEGER" />
+    <result column="object_type" property="objectType" jdbcType="INTEGER" />
+    <result column="object_id" property="objectId" jdbcType="BIGINT" />
+  </resultMap>
+  <update id="updateByType" parameterType="java.util.HashMap">
+   update primarykey set  object_id = #{objectId} where object_type = #{objectType}
+  </update>
+  <select id="getByObjectType" parameterType="Integer" resultMap="PrimaryKeyResultMap">
+      select * from primarykey where object_type = #{objectType}
+  </select>
+  <insert id="insert" parameterType="com.classaffairs.entity.PrimaryKey" >
+    insert into primarykey
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      primary_key_id,
+      object_type,
+      object_id,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{primarykeyId},
+      #{objectType},
+      #{objectId}
+    </trim>
+  </insert>
+  <select id="findById" parameterType="Integer" resultMap="PrimaryKeyResultMap">
+  	select * from primarykey where primary_key_id = #{primarykey_id}
+  </select>
+</mapper>

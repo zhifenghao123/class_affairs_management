@@ -1,0 +1,51 @@
+@CHARSET "UTF-8";
+
+/*  Reset CSS */
+*{ margin:0; padding:0;}
+body, div,iframe, ul, ol, dl, dt, dd, li, dl, h1, h2, h3, h4, table,th, td, input, button, select, textarea { margin:0px; padding:0px; font-family:Arial, Helvetica, sans-serif,"宋体"; font-style: normal; }
+ol, ul ,li,p{list-style: none;} 
+img {border: 0; margin:0; padding:0; vertical-align:middle;}
+a,a:hover{text-decoration:none;} 
+/* 登陆窗口开始  */
+#login{ position:fixed;_position:absolute;left:35%;top:35%;} 
+#login table td{
+ font-family:Arial, Helvetica, sans-serif;
+       font-size:16px; font-weight: bolder;
+}
+#login input{ border:1px #ccc solid;height: 20px;  margin:0; padding-left: 24px;}
+#userId{background:url(/img/admin/username_bg.gif) left no-repeat #FFF;}
+#password{background:url(/img/admin/password_bg.gif) left no-repeat #FFF;}
+/*搜索*/
+.search_1{width:99.2%;height:40px;margin-top:5px;overflow:hidden;}
+.addForm{margin-top:40px;margin-left:20px;}
+.edit_checkbox ul{clear:both;overflow:hidden;}
+.edit_checkbox ul li{float:left;width:150px;display:inline;padding:5px 3px;}
+
+/*运动项目弹出层*/
+.tccwin{
+	position:absolute;
+	z-index:1000;
+	width:460px;
+	_width:462px;
+	overflow:hidden;
+	border:4px solid #D9D9D9;
+	background:#fff;
+	padding:1px;
+}
+.yntit2{ width:460px; height:30px; line-height:30px; text-indent:30px; background:url(/img/manage/ico-ring.jpg) no-repeat; border-bottom:1px solid #ccc; margin:0 0 10px 0; clear:both;  }
+.yntit3{ width:460px; height:30px; line-height:30px; text-align:center;  border-top:1px solid #ccc; margin:10px 0; clear:both; padding:10px 0;  }
+.yntitl{ width:460px; _width:462px;height:30px; border-bottom:1px solid #ccc; margin:0 0 10px 0; clear:both;  }
+.yntitl ul{ width:460px; _width:462px; height:30px; clear:both;overflow:hidden;}
+.yntitl ul li{ float:left; width:90px; height:30px;  margin:0px 1px;}
+.yntitl ul li a{ display:block; width:90px; height:30px;line-height:30px;  background:#F5F5F5;text-align:center;}
+.yntitl ul li a:hover{  background:#E54044; }
+.yntitl ul li.onred a{  background:#E54044; color:#fff; }
+.yntitl ul li.onred a:hover{  background:#F5F5F5; color:#000; }
+
+.ynxl{ width:460px; height:auto; margin:0 0 0 10px;}
+.ynxl span{display:block; width:auto; height:35px; line-height:35px; vertical-align:middle; padding:0 10px; white-space:nowrap; float:left; z-index:2  }
+.ynxl input{ margin:0 5px 0 0;}
+
+
+
+

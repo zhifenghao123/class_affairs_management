@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.classaffairs.entity.Notice" >
+  <resultMap id="BaseResultMap" type="com.classaffairs.entity.Notice" >
+    <id column="notice_id" property="noticeId" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="receiving_unit_no" property="receivingUnitNo" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    <result column="enclosure_file" property="enclosureFile" jdbcType="VARCHAR" />
+    <result column="path" property="path" jdbcType="VARCHAR" />
+    <result column="size" property="size" jdbcType="FLOAT" />
+    <result column="publisher_no" property="publisherNo" jdbcType="VARCHAR" />
+    <result column="publisher_name" property="publisherName" jdbcType="VARCHAR" />
+    <result column="publish_time" property="publishTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    notice_id, type, receiving_unit_no, title, content, enclosure_file,path, size, publisher, publish_time
+  </sql>
+  <insert id="insert" parameterType="com.classaffairs.entity.Notice" >
+    insert into notice
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+	    notice_id, 
+	    type, 
+	    receiving_unit_no,
+	    title, 
+	    content, 
+	    enclosure_file,
+	    path, 
+	    size, 
+	    publisher_no, 
+	    publisher_name, 
+	    publish_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{noticeId,jdbcType=BIGINT},
+      #{type,jdbcType=INTEGER},
+       #{receivingUnitNo,jdbcType=VARCHAR},
+      #{title,jdbcType=VARCHAR},
+      #{content,jdbcType=LONGVARCHAR},
+      #{enclosureFile,jdbcType=VARCHAR},
+      #{path,jdbcType=VARCHAR},
+      #{size,jdbcType=FLOAT},
+      #{publisherNo,jdbcType=VARCHAR},
+      #{publisherName,jdbcType=VARCHAR},
+      #{publishTime,jdbcType=TIMESTAMP},
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.classaffairs.entity.Notice" >
+    update notice
+    <set >
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="receivingUnitNo != null" >
+        receiving_unit_no = #{receivingUnitNo,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enclosureFile != null" >
+        enclosure_file = #{enclosureFile,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        size = #{size,jdbcType=FLOAT},
+      </if>
+      <if test="publisherNo != null" >
+        publisher_no = #{publisherNo,jdbcType=VARCHAR},
+      </if>
+      <if test="publisherName != null" >
+        publisher_name = #{publisherName,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTime != null" >
+        publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where notice_id = #{noticeId,jdbcType=BIGINT}
+  </update>
+  <delete id="delete" parameterType="Long">
+		delete from notice where notice_id=#{noticeId}
+   </delete>
+	<select id="findById" parameterType="Long" resultMap="BaseResultMap">
+		select * from notice where notice_id=#{noticeId}
+	</select>
+  	<select id="findAllNotice" resultMap="BaseResultMap">
+		select * from notice
+	</select>
+
+
+	<select id="getNoticesByTeacherNoAndTitle" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+		select * from notice where class_teaching_no in (select class_teaching_no from class_teaching where teacher_no=#{teacherNo})
+		<if test="title!=null">
+			AND title=#{title}
+		</if>
+	</select>
+	<select id="findNoticeByFuzzyInformation" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+		select * from notice where 1 = 1
+		<if test="keyWordSearch != null &amp;&amp; keyWordSearch != ''">
+			AND title like #{keyWordSearch}
+		</if>
+		<if test="publisherNo != null &amp;&amp; publisherNo != ''">
+			AND publisher_no = #{publisherNo}
+		</if>
+		<if test="publisherName != null &amp;&amp; publisherName != ''">
+			AND publisher_name = #{publisherName}
+		</if>
+		<if test="startTimeToSearchPublishTime != null &amp;&amp; startTimeToSearchPublishTime != ''">
+			<![CDATA[and DATE_FORMAT(publishTime, '%Y-%m-%d %H%i%s')>=  DATE_FORMAT(#{startTimeToSearchPublishTime}, '%Y-%m-%d %H%i%s')]]>
+		</if>
+		<if test="endTimeToSearchPublishTime != null &amp;&amp; endTimeToSearchPublishTime != ''">
+			<![CDATA[and DATE_FORMAT(publishTime, '%Y-%m-%d %H%i%s')<=  DATE_FORMAT(#{endTimeToSearchPublishTime}, '%Y-%m-%d %H%i%s')]]>
+		</if>
+		<if test="currentExecutiveClassName != null &amp;&amp; currentExecutiveClassName != ''">
+			AND publisher_no in (select student_no from student where `executive_class_name` in (select name from executiveclass where executive_class_group = (select executive_class_group from executiveclass where name  =#{currentExecutiveClassName,jdbcType=VARCHAR})))
+		</if>
+	</select>
+</mapper>

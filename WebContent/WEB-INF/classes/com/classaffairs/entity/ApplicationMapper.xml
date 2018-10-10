@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.classaffairs.entity.Application" >
+  <resultMap id="ApplicationResultMap" type="com.classaffairs.entity.Application" >
+    <id column="application_id" property="applicationId" jdbcType="BIGINT" />
+    <result column="display_name" property="displayName" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="icon_path" property="iconPath" jdbcType="VARCHAR" />
+    <result column="entry_authority_ids" property="entryAuthorityIds" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="VARCHAR" />
+    <result column="parent_application_id" property="parentApplicationId" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <collection property="application" column="application_id" select="getByParentApplicationId" ofType="com.classaffairs.entity.Application"></collection>
+  </resultMap>
+
+  <insert id="insert" parameterType="com.classaffairs.entity.Application" >
+    insert into `application`
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      application_id,
+      display_name,
+      url,
+      icon_path,
+      entry_authority_ids,
+      flag,
+      parent_application_id,
+      type,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{applicationId,jdbcType=BIGINT},
+      #{displayName,jdbcType=VARCHAR},
+      #{url,jdbcType=VARCHAR},
+      #{iconPath,jdbcType=VARCHAR},
+      #{entryAuthorityIds,jdbcType=VARCHAR},
+      #{flag,jdbcType=VARCHAR},
+      #{parentApplicationId,jdbcType=BIGINT},
+      #{type,jdbcType=VARCHAR},
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.classaffairs.entity.Application" >
+    update application
+    <set >
+      <if test="displayName != null" >
+        display_name = #{displayName,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="iconPath != null" >
+        icon_path = #{iconPath,jdbcType=VARCHAR},
+      </if>
+      <if test="entryAuthorityIds != null" >
+        entry_authority_ids = #{entryAuthorityIds,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="parentApplicationId != null" >
+        parent_application_id = #{parentApplicationId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where application_id = #{applicationId,jdbcType=BIGINT}
+  </update>
+  <delete id="delete" parameterType="Long">
+   delete from application where application_id = #{applicationId}
+  </delete>
+  <select id="findById" parameterType="Long" resultMap="ApplicationResultMap">
+  select * from application where application_id = #{applicationId}
+  </select>
+   <select id="getByParentApplicationId" parameterType="Long" resultMap="ApplicationResultMap">
+  select * from application where parent_application_id = #{parentApplicationId} 
+  </select>
+  <select id="getByParentApplicationIdAndType" parameterType="java.util.HashMap" resultMap="ApplicationResultMap">
+  select * from application where parent_application_id = #{parentApplicationId} 
+   <if test="type!=null and type!=''">
+        <if test="type==1">
+           and type = 1
+        </if>
+		<if test="type==2">
+          and type = 1
+        </if>
+        <if test="type==3">
+          and type = 3
+        </if>
+	</if>
+
+  </select>
+  <select id="findAll" resultMap="ApplicationResultMap">
+  select * from application where type=1
+  </select>
+  <select id="getAll" parameterType="java.util.HashMap" resultMap="ApplicationResultMap">
+  select * from application where display_name like #{displayName}
+  </select>
+  <select id="getByDisplayName" parameterType="String" resultMap="ApplicationResultMap">
+  select * from application where display_name = #{displayName}
+  </select>
+   <select id="getByUrl" parameterType="String" resultMap="ApplicationResultMap">
+  select * from application where url = #{url}
+  </select>
+   <select id="findAllApplication" parameterType="String" resultMap="ApplicationResultMap">
+  select * from application where type = #{type}
+  </select>
+   <select id="findIndexApplication" parameterType="String" resultMap="ApplicationResultMap">
+  select * from application where flag = #{flag}
+  </select>
+  <select id="getAllApplication" resultMap="ApplicationResultMap">
+  select * from application where 1=1
+  </select>
+</mapper>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.classaffairs.entity.ExecutiveClass" >
+  <resultMap id="ExecutiveClassResultMap" type="com.classaffairs.entity.ExecutiveClass" >
+    <id column="executive_class_id" property="executiveClassId" jdbcType="BIGINT" />
+    <result column="grade_no" property="gradeNo" jdbcType="VARCHAR" />
+    <result column="school_no" property="schoolNo" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="monitor_student_no" property="monitorStudentNo" jdbcType="VARCHAR" />
+    <result column="monitor_name" property="monitorName" jdbcType="VARCHAR" />
+    <result column="executive_class_group" property="executiveClassGroup" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.classaffairs.entity.ExecutiveClass" >
+    insert into executiveclass
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      executive_class_id,
+      grade_no,
+      school_no,
+      name,
+      monitor_student_no,
+      monitor_name,
+      executive_class_group,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{executiveClassId,jdbcType=BIGINT},
+      #{gradeNo,jdbcType=VARCHAR},
+      #{schoolNo,jdbcType=VARCHAR},
+      #{name,jdbcType=VARCHAR},
+      #{monitorStudentNo,jdbcType=VARCHAR},
+      #{monitorName,jdbcType=VARCHAR},
+      #{executiveClassGroup,jdbcType=VARCHAR},
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.classaffairs.entity.ExecutiveClass" >
+    update `executiveclass`
+    <set >
+    <if test="gradeNo != null" >
+        `grade_no` = #{gradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolNo != null" >
+        `school_no` = #{schoolNo,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="monitorStudentNo != null" >
+        monitor_student_no = #{monitorStudentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="monitorName != null" >
+        monitor_name = #{monitorName,jdbcType=VARCHAR},
+      </if>
+      <if test="executiveClassGroup != null" >
+        executive_class_group = #{executiveClassGroup,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where executive_class_id = #{executiveClassId,jdbcType=BIGINT}
+  </update>
+  <delete id="delete" parameterType="Long">
+    delete from executiveclass where executive_class_id = #{executiveClassId}
+  </delete>
+  <select id="findById" parameterType="Long" resultMap="ExecutiveClassResultMap">
+    select * from executiveclass where executive_class_id = #{executiveClassId}
+  </select>
+  <select id="findExecutiveClassByExecutiveClassName" parameterType="String" resultMap="ExecutiveClassResultMap">
+    select * from executiveclass where name = #{name}
+  </select>
+  <select id="getExecutiveClassByState" parameterType="INTEGER" resultMap="ExecutiveClassResultMap">
+    select * from executiveclass where state = #{state}
+  </select>
+   <select id="getAll"  resultMap="ExecutiveClassResultMap">
+    select * from executive_class where 1 = 1
+  </select>
+   <select id="findExecutiveClassByFuzzyInformation"  resultMap="ExecutiveClassResultMap">
+   	select * from executiveclass where 1 = 1
+   	<if test="majorNo != null" >
+        `major_no` like #{majorNo,jdbcType=VARCHAR},
+    </if>
+    <if test="name != null" >
+        `name` like #{name,jdbcType=VARCHAR},
+    </if>
+  </select>
+  
+  <select id="findExecutiveClassListByGradeNoAndSchoolNo"  resultMap="ExecutiveClassResultMap">
+   	select * from executiveclass where 1 = 1
+   	<if test="gradeNo != null &amp;&amp; gradeNo != '' " >
+       and `grade_no` = #{gradeNo,jdbcType=VARCHAR}
+    </if>
+    <if test="schoolNo != null &amp;&amp; schoolNo != '' " >
+      and  `school_no` = #{schoolNo,jdbcType=VARCHAR}
+    </if>
+    <if test="executiveClassGroup != null &amp;&amp; executiveClassGroup != '' " >
+      and  `executive_class_group` = #{executiveClassGroup,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <select id="findAll"  resultMap="ExecutiveClassResultMap">
+    select * from executiveclass where 1 = 1
+  </select>
+   <select id="getAllSameGroupExecutiveClassListByOneExecutiveClassName" parameterType="String" resultMap="ExecutiveClassResultMap">
+    select * from executiveclass where executive_class_group = (select executive_class_group from executiveclass where name = #{name}) and grade_no = (select grade_no from executiveclass where name = #{name}) and school_no = (select school_no from executiveclass where name = #{name})
+  </select>
+</mapper>
