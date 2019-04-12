@@ -1,5 +1,7 @@
 package com.classaffairs.service;
 
+import java.util.List;
+
 import com.classaffairs.entity.Administrator;
 import com.classaffairs.framework.sdp.orm.query.Page;
 
@@ -23,5 +25,11 @@ public interface AdministratorService {
 	 * @return Page<Interioremployee> - 内部成员Page
 	 */
 	public Page<Administrator> pageQueryAdministatorsByName(String name, String page, String pageSize);
+	
+	/**
+	 * 通过角色id获取内部成员对象List
+	 * @return 员工对象List
+	 */
+	public List<Administrator> getAdministratorsByRoleId(Long roleId);
 	
 }

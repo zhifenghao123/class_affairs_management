@@ -1,6 +1,7 @@
 package com.classaffairs.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,5 +109,23 @@ public class AdministratorServiceImpl implements AdministratorService {
 			ee.printStackTrace();
 			return null;
 		}
+	}
+
+	@Override
+	public List<Administrator> getAdministratorsByRoleId(Long roleId) {
+		List<Administrator> administrators = null;
+		try {
+			administrators = (List<Administrator>) itsAdministratorDao.mFind("getByRoleId", roleId);
+			return administrators;
+		} catch (DataAccessException e) {
+			Log.log.error("通过角色Id获得内部成员数据库访问异常,角色id:" + roleId, e);
+			e.printStackTrace();
+
+		} catch (Exception ee) {
+			Log.log.error("通过角色Id获得内部成员异常,角色id:" + roleId, ee);
+			ee.printStackTrace();
+
+		}
+		return administrators;
 	}
 }

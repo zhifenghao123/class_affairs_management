@@ -23,10 +23,11 @@
               $('input:checkbox:checked').each(function() {
                 checked.push($(this).val());
               });
+            
               var data = {
                 roleId: roleId,
                 name: $("#name").val(),
-                creatortype: $("#creatorType").val(),
+                creatorType: $("#creatorType").val(),
                 authorityCode: checked.join(",")
               };
               $.post(url, data,
@@ -87,50 +88,40 @@
         </script>
     </head>
     
-    <body>
-      <div class="addForm">
+	<body>
+		<div class="addForm">
         <div class="formbox">
-          <form>
-            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-              <tr>
-                <td width="77" class="tdleft gray3">
-                  角色名称：
-                </td>
-                <td colspan="5">
-                  <span>
-                    <input id="name" type="text" class="putin1 black easyui-validatebox" required="true"
-                    validType="length[1,10]" style="width:230px;" />
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td width="77" class="tdleft gray3">
-                  创建类型：
-                </td>
-                <td colspan="5">
-                  <label>
-                    <select class="select1 black easyui-combobox" editable="false" panelHeight="50"
-                    id="creatorType" style="width:230px;">
-                      <option value="1">
-                        网站用户
-                      </option>
-                      <option value="2">
-                        俱乐部用户
-                      </option>
-                    </select>
-                  </label>
-              </tr>
-              <tr>
-                <td width="77" class="tdleft gray3">
-                  拥有权限：
-                </td>
-                <td colspan="5">
-                  <div class="edit_checkbox">
-                    <ul id="ownAuthority">
-                    </ul>
-                  </div>
-                </td>
-              </tr>
+			<form>
+            	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+              		<tr>
+                		<td width="77" class="tdleft gray3"> 角色名称：</td>
+                		<td colspan="5">
+                  			<span>
+                    			<input id="name" type="text" class="putin1 black easyui-validatebox" required="true"
+                  				validType="length[1,10]" style="width:230px;" />
+                  			</span>
+                		</td>
+              		</tr>
+              		<tr>
+                		<td width="77" class="tdleft gray3"> 创建类型</td>
+                		<td colspan="5">
+                  			<label>
+                    			<select class="select1 black easyui-combobox" editable="false" panelHeight="50" id="creatorType" style="width:230px;">
+                      				<option value="1"> 系统管理员</option>
+                      				<option value="2">学院管理人员</option>
+                    			</select>
+                 			</label>
+                 		</td>
+              		</tr>
+              		<tr>
+                		<td width="77" class="tdleft gray3"> 拥有权限：</td>
+                		<td colspan="5">
+                  			<div class="edit_checkbox">
+                    			<ul id="ownAuthority">
+                    			</ul>
+                  			</div>
+               			</td>
+              		</tr>
             </table>
           </form>
         </div>

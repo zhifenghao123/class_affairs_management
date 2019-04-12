@@ -7,8 +7,8 @@
 	    <result column="name" property="name" jdbcType="VARCHAR" />
 	    <result column="password" property="password" jdbcType="VARCHAR" />
 	    <result column="type" property="type" jdbcType="INTEGER" />
-	    <result column="create_date" property="createdate" jdbcType="TIMESTAMP" />
-	    <result column="last_date" property="lastdate" jdbcType="TIMESTAMP" />
+	    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+	    <result column="last_update_date" property="lastUpdateDate" jdbcType="TIMESTAMP" />
    		<result column="state" property="state" jdbcType="INTEGER" />
    		<result column="managing_school" property="managingSchool" jdbcType="VARCHAR" />
    		<result column="role_id" property="roleId" jdbcType="BIGINT" />
@@ -22,7 +22,7 @@
       password,
       type,
       create_date,
-      last_date,
+      last_update_date,
       state,
       managing_school,
       role_id,
@@ -33,8 +33,8 @@
       #{name,jdbcType=VARCHAR},
       #{password,jdbcType=VARCHAR},
       #{type,jdbcType=INTEGER},
-      #{createdate,jdbcType=TIMESTAMP},
-      #{lastdate,jdbcType=TIMESTAMP},
+      #{createDate,jdbcType=TIMESTAMP},
+      #{lastUpdateDate,jdbcType=TIMESTAMP},
       #{state,jdbcType=INTEGER},
  	  #{managingSchool,jdbcType=VARCHAR},
  	  #{roleId,jdbcType=BIGINT},
@@ -56,8 +56,11 @@
       <if test="type != null" >
         type = #{type,jdbcType=LONGVARCHAR},
       </if>
-      <if test="lastdate != null" >
-        last_date = #{lastdate,jdbcType=VARCHAR},
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateDate != null" >
+        last_update_date = #{lastUpdateDate,jdbcType=VARCHAR},
       </if>
       <if test="state != null" >
         state = #{state,jdbcType=VARCHAR},
@@ -81,4 +84,7 @@
   	<select id="findAllByName" parameterType="java.util.HashMap"  resultMap="AdministratorResultMap">
   		select * from administrator where  name like #{name,jdbcType=VARCHAR} 
   	</select>
+  	<select id="getByRoleId" parameterType="Integer" resultMap="AdministratorResultMap">
+  		select * from administrator where role_id = #{roleId,jdbcType=BIGINT}
+ 	</select>
 </mapper>

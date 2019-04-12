@@ -20,12 +20,12 @@
               border: false,
               singleSelect: true,
               columns: [[{
-                  field: 'jobNo',
+                  field: 'administratorNo',
                   title: '账号',
                   width: 100
                 },
                 {
-                field: 'realname',
+                field: 'name',
                 title: '真实姓名',
                 width: 100
               },
@@ -35,12 +35,12 @@
                 width: 200
               },
               {
-                field: 'createdate',
+                field: 'createDate',
                 title: '创建时间',
                 width: 100
               },
               {
-                field: 'lastdate',
+                field: 'lastUpdateDate',
                 title: '最后修改时间',
                 width: 100
               },
@@ -57,7 +57,7 @@
                 }
               },
               {
-                field: 'interioremployeeId',
+                field: 'administratorId',
                 title: '操作',
                 width: 150,
                 formatter: function(value, row, index) {

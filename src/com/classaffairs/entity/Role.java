@@ -10,6 +10,7 @@ public class Role {
 	public Integer creatorType;
 	public Long creatorId;
 	public Date createDate;
+	public Date lastUpdateDate;
 	public String authorityCode;
 	public Integer state;
 	
@@ -42,6 +43,12 @@ public class Role {
 	}
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+	public Date getLastUpdateDate() {
+		return lastUpdateDate;
+	}
+	public void setLastUpdateDate(Date lastUpdateDate) {
+		this.lastUpdateDate = lastUpdateDate;
 	}
 	public String getAuthorityCode() {
 		return authorityCode;

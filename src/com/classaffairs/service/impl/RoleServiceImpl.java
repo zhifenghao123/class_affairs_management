@@ -117,5 +117,20 @@ public class RoleServiceImpl implements RoleService {
 		}
 		return roleList;
 		}
+	
+	@Override
+	public Role getSingleRoleByName(String name) {
+		Role role = null;
+		try {
+			role = (Role) itsRoleDao.mSelectOne("getSingleRoleByName", name);
+		} catch (DataAccessException dae) {
+			Log.log.error("通过角色名称获取角色操作数据库异常,角色名称：" + name, dae);
+			dae.printStackTrace();
+		} catch (Exception e) {
+			Log.log.error("通过角色名称获取角色异常,角色名称：" + name, e);
+			e.printStackTrace();
+		}
+		return role;
+	}
 
 }
