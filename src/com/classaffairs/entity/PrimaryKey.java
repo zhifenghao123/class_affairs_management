@@ -18,6 +18,9 @@ public class PrimaryKey {
 	public static final int OperationLog_OBJECTTYPE = 15;
 	public static final int OnlineBehavior_ObjectType = 16;
 	public static final int GraduationProject_OBJECTTYPE = 17;
+	public static final int AUTHORITY_OBJECTTYPE = 18;
+	public static final int ROLE_OBJECTTYPE = 19;
+	public static final int ADMINISTRATOR_OBJECTTYPE = 20;
     private Integer primaryKeyId;
     private Integer objectType;
     private Long objectId;

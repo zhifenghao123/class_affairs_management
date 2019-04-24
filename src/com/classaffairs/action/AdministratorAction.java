@@ -1,25 +1,36 @@
 package com.classaffairs.action;
 
+import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.classaffairs.common.CreatePrimaryKey;
 import com.classaffairs.common.md5.MD5Data;
 import com.classaffairs.entity.Administrator;
+import com.classaffairs.entity.PrimaryKey;
 import com.classaffairs.framework.core.utils.DateUtil;
+import com.classaffairs.framework.core.utils.Log;
 import com.classaffairs.framework.sdp.orm.query.Page;
 import com.classaffairs.service.AdministratorService;
 import com.classaffairs.service.RoleService;
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 @Controller
 public class AdministratorAction {
+	
+	@Resource
+	private UserDetailsService classAffairUserDetailsService;
 	@Autowired
 	private AdministratorService itsAdministratorService;
 	@Autowired
@@ -141,17 +152,17 @@ public class AdministratorAction {
 
 				JsonObject em = new JsonObject();
 
-				em.addProperty("interioradministratorId", administrator.getAdministratorId());
+				em.addProperty("administratorId", administrator.getAdministratorId());
 
-				em.addProperty("jobNo", administrator.getAdministratorNo());
+				em.addProperty("administratorNo", administrator.getAdministratorNo());
 
-				em.addProperty("realname", administrator.getName());
+				em.addProperty("name", administrator.getName());
 
 				em.addProperty("roleName", itsRoleService.findRoleByRoleId(administrator.getRoleId()).getName());
 
-				em.addProperty("createdate", DateUtil.formatDate(administrator.getCreatedate(), "yyyy-MM-dd HH:mm:ss"));
+				em.addProperty("createDate", DateUtil.formatDate(administrator.getCreateDate(), "yyyy-MM-dd HH:mm:ss"));
 
-				em.addProperty("lastdate", DateUtil.formatDate(administrator.getLastdate(), "yyyy-MM-dd HH:mm:ss"));
+				em.addProperty("lastUpdateDate", DateUtil.formatDate(administrator.getLastUpdateDate(), "yyyy-MM-dd HH:mm:ss"));
 
 				em.addProperty("state", administrator.getState());
 
@@ -163,6 +174,122 @@ public class AdministratorAction {
 		result.add("rows", array);
 
 		return result.toString();
+	}
+	
+	/**
+	 * 新增内部员工信息
+	 */
+	@RequestMapping(value = "/admin/addAdministrator")
+	@ResponseBody
+	public String addAdministrator(Administrator administrator, HttpServletRequest request) {
+
+		JsonObject result = new JsonObject();
+
+		Long administratorId = CreatePrimaryKey.getInstnce().getObjectId(PrimaryKey.ADMINISTRATOR_OBJECTTYPE);
+
+		administrator.setAdministratorId(administratorId);
+		
+		administrator.setPassword(MD5Data.encryption(administrator.getAdministratorNo()));
+
+		administrator.setCreateDate(new Date());
+
+		administrator.setLastUpdateDate(new Date());
+
+		administrator.setState(Administrator.STATE_ONUSER);
+
+		boolean success = itsAdministratorService.addAdministrator(administrator);
+
+		if (success)
+			classAffairUserDetailsService.loadUserByUsername((String) request.getSession().getAttribute("jobNo") + "-");
+
+		result.addProperty("success", success);
+
+		return result.toString();
+	}
+
+	/**
+	 * 更新内部员工信息
+	 */
+	@RequestMapping(value = "/admin/updateAdministrator")
+	@ResponseBody
+	public String updateAdministrator(Administrator administrator, HttpServletRequest request) {
+
+		JsonObject result = new JsonObject();
+
+		Administrator itsadministrator = itsAdministratorService.findAdministratorByAdministratorId(administrator.getAdministratorId());
+
+		itsadministrator.setAdministratorNo(administrator.getAdministratorNo());
+
+		itsadministrator.setName(administrator.getName());
+
+		itsadministrator.setLastUpdateDate(new Date());
+
+		itsadministrator.setRoleId(administrator.getRoleId());
+
+		boolean success = itsAdministratorService.updateAdministrator(itsadministrator);
+
+		if (success)
+			classAffairUserDetailsService.loadUserByUsername((String) request.getSession().getAttribute("jobNo") + "-");
+			
+       result.addProperty("success", success);
+		return result.toString();
+	}
+
+	/**
+	 * 删除内部员工信息
+	 */
+	@RequestMapping(value = "/admin/deleteAdministratorById")
+	@ResponseBody
+	public String deleteAuthorityById(String id) {
+
+		id = id == null ? "" : id.trim();
+
+		Long administratorId = Long.valueOf(id);
+
+		//boolean success = init().deleteadministrator(administratorId);//haozhifeng20170409将删除内部员工有物理删除修改为逻辑删除
+		Administrator administrator = itsAdministratorService.findAdministratorByAdministratorId(administratorId);
+		administrator.setState(3);
+		administrator.setLastUpdateDate(new Date());
+		boolean success = itsAdministratorService.updateAdministrator(administrator);
+		
+		JsonObject result = new JsonObject();
+
+		result.addProperty("success", success);
+
+		return result.toString();
+	}
+	
+	/**
+	 * 通过员工id获取内部员工信息
+	 */
+	@RequestMapping(value = "/admin/getAdministratorById")
+	@ResponseBody
+	public String getAdministratorById(String administratorId) {
+
+		administratorId = administratorId == null ? "" : administratorId.trim();
+		
+		JsonObject jo = new JsonObject();
+		
+		Long adminId = Long.valueOf(administratorId);
+
+		Administrator administrator = itsAdministratorService.findAdministratorByAdministratorId(adminId);
+
+
+		/*try {
+			BeanUtils.copyProperties(itsEmployee, administrator);//对外暴露太对信息
+		} catch (Exception e) {
+			Log.log.error("内部员工bean转换异常", e);
+			e.printStackTrace();
+		}
+		Gson gson = new Gson();
+		return gson.toJson(itsEmployee);*/
+		
+		//jo.addProperty("administratorId", administrator.getAdministratorId());
+		jo.addProperty("administratorNo", administrator.getAdministratorNo());
+		jo.addProperty("name", administrator.getName());
+		jo.addProperty("roleId", administrator.getRoleId());
+
+		return jo.toString();
 	}
 	
 }

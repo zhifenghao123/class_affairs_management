@@ -7,6 +7,7 @@
     <result column="creator_type" property="creatorType" jdbcType="INTEGER" />
     <result column="creator_id" property="creatorId" jdbcType="INTEGER" />
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="last_update_date" property="lastUpdateDate" jdbcType="TIMESTAMP" />
     <result column="authority_code" property="authorityCode" jdbcType="LONGVARCHAR" />
     <result column="state" property="state" jdbcType="INTEGER" />
   </resultMap>
@@ -15,11 +16,12 @@
     <trim prefix="(" suffix=")" suffixOverrides="," >
       role_id,
       `name`,
-      creatorType,
-      creatorId,
-      createDate,
+      creator_type,
+      creator_id,
+      create_date,
+       last_update_date,
       `state`,
-      authorityCode,
+      authority_code,
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       #{roleId,jdbcType=BIGINT},
@@ -27,6 +29,7 @@
       #{creatorType,jdbcType=INTEGER},
       #{creatorId,jdbcType=INTEGER},
       #{createDate,jdbcType=TIMESTAMP},
+       #{lastUpdateDate,jdbcType=TIMESTAMP},
       #{state,jdbcType=INTEGER},
       #{authorityCode,jdbcType=LONGVARCHAR},
     </trim>
@@ -38,19 +41,22 @@
         `name` = #{name,jdbcType=VARCHAR},
       </if>
       <if test="creatorType != null" >
-        creatorType = #{creatorType,jdbcType=INTEGER},
+        creator_type = #{creatorType,jdbcType=INTEGER},
       </if>
       <if test="creatorId != null" >
-        creatorId = #{creatorId,jdbcType=INTEGER},
+        creator_id = #{creatorId,jdbcType=INTEGER},
       </if>
       <if test="createDate != null" >
-        createDate = #{createDate,jdbcType=TIMESTAMP},
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateDate != null" >
+        last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
       </if>
       <if test="state != null" >
         `state` = #{state,jdbcType=INTEGER},
       </if>
       <if test="authorityCode != null" >
-        authorityCode = #{authorityCode,jdbcType=LONGVARCHAR},
+        authority_code = #{authorityCode,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where role_id = #{roleId,jdbcType=INTEGER}

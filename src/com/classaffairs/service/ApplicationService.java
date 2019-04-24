@@ -33,4 +33,12 @@ public interface ApplicationService {
 	public Page<Application> getAllApplications(String page, String rows, String displayName);
 	
 	public Application getApplicationsByDisplayName(String displayname);
+	
+	/**
+	 * 获取两个后台首页
+	 * @param flag
+	 * @return 应用对象
+	 */
+	public List<Application> getapplicationByflag(String flag);
+	
 }

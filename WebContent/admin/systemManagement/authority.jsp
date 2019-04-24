@@ -31,6 +31,11 @@
                 width: 150
               },
               {
+                  field: 'updateDate',
+                  title: '最近修改时间',
+                  width: 150
+                },
+              {
                 field: 'state',
                 title: '状态',
                 width: 100,

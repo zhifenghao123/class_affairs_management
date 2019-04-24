@@ -28,4 +28,10 @@ public interface RoleService {
 	 * @return List<Role> - 角色List
 	 */
 	public List<Role> getRoleByState(int state);
+	/**
+	 * 通过角色名称获取角色
+	 * @param name - 角色名称
+	 * @return Role - 角色对象
+	 */
+	public Role getSingleRoleByName(String name);
 }

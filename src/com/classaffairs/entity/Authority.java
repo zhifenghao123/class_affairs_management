@@ -9,6 +9,7 @@ public class Authority {
 	public Long authorityId;
     public String name;
     public Date createDate;
+    public Date updateDate;
     public Integer state;
 	public Long getAuthorityId() {
 		return authorityId;
@@ -27,6 +28,12 @@ public class Authority {
 	}
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+	public Date getupdateDate() {
+		return updateDate;
+	}
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
 	}
 	public Integer getState() {
 		return state;

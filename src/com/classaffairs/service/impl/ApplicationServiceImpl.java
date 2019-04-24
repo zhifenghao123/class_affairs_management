@@ -205,5 +205,23 @@ public class ApplicationServiceImpl implements ApplicationService {
 
 		return application;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Application> getapplicationByflag(String flag){
+		List<Application> allApplications = null;
+		try {
+			allApplications = (List<Application>) itsApplicationDao.mFind("findIndexApplication",flag);
+		} catch (DataAccessException dae) {
+			Log.log.error("获取所有应用访问数据库异常", dae);
+
+			dae.printStackTrace();
+		} catch (Exception e) {
+			Log.log.error("获取所有应用异常", e);
+
+			e.printStackTrace();
+		}
+
+		return allApplications;
+	}
 
 }

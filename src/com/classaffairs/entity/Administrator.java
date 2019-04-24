@@ -3,14 +3,18 @@ package com.classaffairs.entity;
 import java.util.Date;
 
 public class Administrator {
+	
+	public static final int STATE_NOTUSE = 0;
+	public static final int STATE_ONUSER = 1;
+	
 
 	public Long administratorId;
 	public String administratorNo;
 	public String name;
     public String password;
     public Integer type;
-    public Date createdate;
-    public Date lastdate;
+    public Date createDate;
+    public Date lastUpdateDate;
     public Integer state;
     public String managingSchool;
     public Long roleId;
@@ -45,17 +49,17 @@ public class Administrator {
 	public void setType(Integer type) {
 		this.type = type;
 	}
-	public Date getCreatedate() {
-		return createdate;
+	public Date getCreateDate() {
+		return createDate;
 	}
-	public void setCreatedate(Date createdate) {
-		this.createdate = createdate;
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
-	public Date getLastdate() {
-		return lastdate;
+	public Date getLastUpdateDate() {
+		return lastUpdateDate;
 	}
-	public void setLastdate(Date lastdate) {
-		this.lastdate = lastdate;
+	public void setLastUpdateDate(Date lastUpdateDate) {
+		this.lastUpdateDate = lastUpdateDate;
 	}
 	public Integer getState() {
 		return state;

@@ -1,19 +1,26 @@
 package com.classaffairs.action;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.commons.beanutils.converters.DateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.classaffairs.common.CreatePrimaryKey;
+import com.classaffairs.entity.Administrator;
 import com.classaffairs.entity.Authority;
+import com.classaffairs.entity.PrimaryKey;
 import com.classaffairs.entity.Role;
 import com.classaffairs.framework.core.init.SpringContextHelper;
 import com.classaffairs.framework.core.utils.DateUtil;
@@ -28,6 +35,11 @@ import com.google.gson.JsonObject;
 
 @Controller
 public class RoleAction {
+	
+	@Resource
+	private UserDetailsService classAffairUserDetailsService;
+	
+	
 	@Autowired
 	private AdministratorService itsAdministratorService;
 
@@ -141,6 +153,7 @@ public class RoleAction {
 			Role ro = new Role();
 
 			try {
+				ConvertUtils.register(new DateConverter(null), java.util.Date.class);
 				BeanUtils.copyProperties(ro, role);
 			} catch (Exception e) {
 				Log.log.error("角色转换异常", e);
@@ -153,6 +166,131 @@ public class RoleAction {
 		Gson gson = new Gson();
 
 		return gson.toJson(roList);
+	}
+	
+	/**
+	 * 新增角色信息
+	 */
+	@RequestMapping(value = "/admin/addRole")
+	@ResponseBody
+	public String addRole(Role role, HttpServletRequest request) {
+
+		String name = role.getName();
+
+		name = name == null ? "" : name.trim();
+
+		JsonObject result = new JsonObject();
+
+		Role ro = init().getSingleRoleByName(name);
+
+		if (ro != null) {
+			result.addProperty("exsit", true);
+
+			return result.toString();
+
+		} else {
+
+			result.addProperty("exsit", false);
+
+		}
+		Long roleId = (Long) CreatePrimaryKey.getInstnce().getObjectId(PrimaryKey.ROLE_OBJECTTYPE);
+
+		role.setRoleId(roleId);
+
+		role.setCreateDate(new Date());
+
+		role.setState(Role.ONUSE);
+
+		role.setCreatorId(Long.valueOf(request.getSession().getAttribute("jobId").toString().trim()));
+
+		boolean success = init().addRole(role);
+
+		result.addProperty("success", success);
+
+		return result.toString();
+	}
+	
+	/**
+	 * 更新角色信息
+	 */
+	@RequestMapping(value = "/admin/updateRole")
+	@ResponseBody
+	public String updateRole(Role role, HttpServletRequest request) {
+
+		JsonObject result = new JsonObject();
+
+		role.setState(Role.ONUSE);
+
+		boolean success = init().updateRole(role);
+
+		
+
+		if (success)
+			classAffairUserDetailsService.loadUserByUsername((String) request.getSession().getAttribute("jobNo") + "-");
+		
+		result.addProperty("success", success);
+		return result.toString();
+	}
+
+	/**
+	 * 通过id获取角色信息
+	 */
+	@RequestMapping(value = "/admin/getRoleById")
+	@ResponseBody
+	public String getRoleById(String id) {
+
+		id = id == null ? "" : id.trim();
+
+		Long roleId = Long.valueOf(id);
+
+		Role role = init().findRoleByRoleId(roleId);
+
+		Role itsRole = new Role();
+
+		try {
+			ConvertUtils.register(new DateConverter(null), java.util.Date.class);
+			BeanUtils.copyProperties(itsRole, role);
+		} catch (Exception e) {
+			Log.log.error("角色bean转换异常", e);
+			e.printStackTrace();
+		}
+		Gson gson = new Gson();
+
+		return gson.toJson(itsRole);
+	}
+
+	/**
+	 * 删除角色信息
+	 */
+	@RequestMapping(value = "/admin/deleteRoleById")
+	@ResponseBody
+	public String deleteRoleById(String id) {
+
+		id = id == null ? "" : id.trim();
+
+		Long roleId = Long.valueOf(id);
+
+		List<Administrator> employeeList = itsAdministratorService.getAdministratorsByRoleId(roleId);
+
+		JsonObject result = new JsonObject();
+
+		if (employeeList != null && employeeList.size() > 0) {
+
+			result.addProperty("exsit", true);
+
+			return result.toString();
+
+		} else {
+
+			result.addProperty("exsit", false);
+
+		}
+
+		boolean success = init().deleteRole(roleId);
+
+		result.addProperty("success", success);
+
+		return result.toString();
 	}
 	
 }

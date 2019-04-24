@@ -5,6 +5,7 @@
     <id column="authority_id" property="authorityId" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
     <result column="state" property="state" jdbcType="INTEGER" />
   </resultMap>
     <select id="findAll" resultMap="AuthorityResultMap">
@@ -16,12 +17,14 @@
       authority_id,
       `name`,
       create_date,
+      update_date,
       `state`,
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       #{authorityId,jdbcType=BIGINT},
       #{name,jdbcType=VARCHAR},
       #{createDate,jdbcType=TIMESTAMP},
+      #{updateDate,jdbcType=TIMESTAMP},
       #{state,jdbcType=INTEGER},
     </trim>
   </insert>
@@ -33,6 +36,9 @@
       </if>
       <if test="createDate != null" >
         create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
       </if>
       <if test="state != null" >
         `state` = #{state,jdbcType=INTEGER},
